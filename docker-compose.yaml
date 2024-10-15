@@ -1,0 +1,13 @@
+name: forum-nestjs
+version: '3.8'
+
+services:
+  pg:
+    container_name: container-forum-nestjs
+    image: bitnami/postgresql:13.16.0
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=db-forum-nestjs
