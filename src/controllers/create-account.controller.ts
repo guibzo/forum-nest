@@ -1,7 +1,7 @@
 import { Body, ConflictException, Controller, Post, UsePipes } from '@nestjs/common'
 import { hash } from 'bcryptjs'
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe'
-import type { PrismaService } from 'src/prisma/prisma.service'
+import { PrismaService } from 'src/prisma/prisma.service'
 import { z } from 'zod'
 
 const createAccountBodySchema = z.object({
@@ -33,12 +33,14 @@ export class CreateAccountController {
 
     const hashedPasswored = await hash(password, 8)
 
-    await this.prisma.user.create({
+    const user = await this.prisma.user.create({
       data: {
         name,
         email,
         password: hashedPasswored,
       },
     })
+
+    return { ...user, password: undefined }
   }
 }
