@@ -12,8 +12,6 @@ export type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>
 
 export const createAccountResponseSchema = zodToJsonSchema(
   z.object({
-    name: z.string(),
-    email: z.string().email(),
     id: z.string().uuid(),
   })
 ) as SchemaObject

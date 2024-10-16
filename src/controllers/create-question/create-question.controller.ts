@@ -40,6 +40,6 @@ export class CreateQuestionController {
       unique: true,
     })
 
-    return { question }
+    return { id: question.id }
   }
 }

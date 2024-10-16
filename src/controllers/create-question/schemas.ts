@@ -11,12 +11,6 @@ export type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>
 
 export const createQuestionResponseSchema = zodToJsonSchema(
   z.object({
-    content: z.string(),
-    title: z.string(),
     id: z.string(),
-    slug: z.string(),
-    createdAt: z.date(),
-    updatedAt: z.date().optional(),
-    authorId: z.string(),
   })
 ) as SchemaObject

@@ -43,6 +43,6 @@ export class CreateAccountController {
       },
     })
 
-    return { ...user, password: undefined }
+    return { id: user.id }
   }
 }
