@@ -1,17 +1,20 @@
 import { Body, Controller, Post, UnauthorizedException, UsePipes } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { compare } from 'bcryptjs'
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe'
 import { PrismaService } from 'src/prisma/prisma.service'
-import { z } from 'zod'
+import {
+  authenticateBodySchema,
+  authenticateResponseSchema,
+  type AuthenticateBodySchema,
+} from './schemas'
 
-const authenticateBodySchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
+@ApiTags('Authentication')
+@ApiOkResponse({
+  status: 201,
+  schema: authenticateResponseSchema,
 })
-
-type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
-
 @Controller('/sessions')
 export class AuthenticateController {
   constructor(private jwt: JwtService, private prisma: PrismaService) {}
