@@ -1,8 +1,8 @@
+import { JwtAuthGuard } from '@//auth/jwt-auth.guard'
+import { ZodValidationPipe } from '@//pipes/zod-validation.pipe'
+import { PrismaService } from '@//prisma/prisma.service'
 import { Controller, Get, Query, UseGuards } from '@nestjs/common'
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
-import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe'
-import { PrismaService } from 'src/prisma/prisma.service'
 import {
   fetchRecentQuestionsPageParamSchema,
   fetchRecentQuestionsResponseSchema,
