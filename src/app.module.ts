@@ -8,6 +8,7 @@ import {
   AuthenticateController,
   CreateAccountController,
   CreateQuestionController,
+  FetchRecentQuestionsController,
 } from './controllers'
 
 @Module({
@@ -18,7 +19,12 @@ import {
     }),
     AuthModule,
   ],
-  controllers: [CreateAccountController, AuthenticateController, CreateQuestionController],
+  controllers: [
+    CreateAccountController,
+    AuthenticateController,
+    CreateQuestionController,
+    FetchRecentQuestionsController,
+  ],
   providers: [PrismaService],
 })
 export class AppModule {}
