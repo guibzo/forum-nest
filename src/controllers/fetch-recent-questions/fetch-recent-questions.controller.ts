@@ -18,13 +18,13 @@ export class FetchRecentQuestionsController {
   @Get()
   @ApiOkResponse({
     schema: fetchRecentQuestionsResponseSchema,
-    description: 'Get a list of questions by ordened by creation date',
+    description: 'Get a list of questions ordened by creation date',
   })
   async handle(
     @Query('page', new ZodValidationPipe(fetchRecentQuestionsPageParamSchema))
     page: FetchRecentQuestionsPageParamSchema
   ) {
-    const perPage = 5
+    const perPage = 10
     const skipHowManyItems = (page - 1) * perPage
 
     const questions = await this.prisma.question.findMany({
