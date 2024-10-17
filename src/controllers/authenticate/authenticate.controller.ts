@@ -11,15 +11,15 @@ import {
 } from './schemas'
 
 @ApiTags('Authentication')
-@ApiOkResponse({
-  status: 201,
-  schema: authenticateResponseSchema,
-})
 @Controller('/sessions')
 export class AuthenticateController {
   constructor(private jwt: JwtService, private prisma: PrismaService) {}
 
   @Post()
+  @ApiOkResponse({
+    schema: authenticateResponseSchema,
+    description: 'Authenticate with email and password',
+  })
   @UsePipes(new ZodValidationPipe(authenticateBodySchema))
   async handle(@Body() body: AuthenticateBodySchema) {
     const { email, password } = body

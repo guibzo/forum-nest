@@ -12,15 +12,16 @@ import {
 } from './schemas'
 
 @ApiTags('Questions')
-@ApiOkResponse({
-  schema: createQuestionResponseSchema,
-})
 @Controller('/questions')
 @UseGuards(JwtAuthGuard)
 export class CreateQuestionController {
   constructor(private prisma: PrismaService) {}
 
   @Post()
+  @ApiOkResponse({
+    schema: createQuestionResponseSchema,
+    description: 'Create a question',
+  })
   async handle(
     @Body(new ZodValidationPipe(createQuestionBodySchema)) body: CreateQuestionBodySchema,
     @CurrentUser() user: UserPayload

@@ -10,15 +10,15 @@ import {
 } from './schemas'
 
 @ApiTags('Account')
-@ApiOkResponse({
-  status: 201,
-  schema: createAccountResponseSchema,
-})
 @Controller('/accounts')
 export class CreateAccountController {
   constructor(private prisma: PrismaService) {}
 
   @Post()
+  @ApiOkResponse({
+    schema: createAccountResponseSchema,
+    description: 'Create account with email and password',
+  })
   @UsePipes(new ZodValidationPipe(createAccountBodySchema))
   async handle(@Body() body: CreateAccountBodySchema) {
     const { name, email, password } = body
