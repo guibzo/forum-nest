@@ -34,10 +34,10 @@ describe('Fetch recent questions (E2E)', () => {
 
     const accessToken = jwt.sign({ sub: user.id })
 
-    const questions = Array.from({ length: 2 }).map((_, index) => ({
-      title: `Question ${index} title`,
-      content: `Question ${index} content`,
-      slug: `question-${index}`,
+    const questions = Array.from({ length: 2 }).map((_, i) => ({
+      title: `Question ${i} title`,
+      content: `Question ${i} content`,
+      slug: `question-${i}`,
       authorId: user.id,
     }))
 
