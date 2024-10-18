@@ -37,12 +37,13 @@
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.14.1",
     "dayjs": "^1.11.13",
+    "nestjs-prisma": "^0.23.0",
+    "nestjs-zod": "^4.0.1",
     "passport-jwt": "^4.0.1",
     "prisma-extension-create-with-slug": "^0.0.5",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "zod": "^3.23.8",
-    "zod-to-json-schema": "^3.23.3",
     "zod-validation-error": "^3.4.0"
   },
   "devDependencies": {

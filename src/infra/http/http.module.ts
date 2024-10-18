@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common'
+import { CustomPrismaModule } from 'nestjs-prisma'
+import { extendedPrismaClient } from '../prisma/prisma.create-with-slug'
 import { PrismaService } from '../prisma/prisma.service'
 import {
   AuthenticateController,
@@ -8,7 +10,14 @@ import {
 } from './controllers'
 
 @Module({
-  imports: [],
+  imports: [
+    CustomPrismaModule.forRootAsync({
+      name: 'PrismaService',
+      useFactory: () => {
+        return extendedPrismaClient
+      },
+    }),
+  ],
   controllers: [
     CreateAccountController,
     AuthenticateController,

@@ -1,8 +1,9 @@
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { PrismaService } from '@/infra/prisma/prisma.service'
 import { Body, ConflictException, Controller, Post, UsePipes } from '@nestjs/common'
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { hash } from 'bcryptjs'
+import { createZodDto, zodToOpenAPI } from 'nestjs-zod'
 import {
   createAccountBodySchema,
   createAccountResponseSchema,
@@ -15,8 +16,9 @@ export class CreateAccountController {
   constructor(private prisma: PrismaService) {}
 
   @Post()
+  @ApiBody({ type: createZodDto(createAccountBodySchema) })
   @ApiOkResponse({
-    schema: createAccountResponseSchema,
+    schema: zodToOpenAPI(createAccountResponseSchema),
     description: 'Create account with email and password',
   })
   @UsePipes(new ZodValidationPipe(createAccountBodySchema))

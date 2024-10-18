@@ -2,7 +2,8 @@ import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { PrismaService } from '@/infra/prisma/prisma.service'
 import { Controller, Get, Query, UseGuards } from '@nestjs/common'
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger'
+import { zodToOpenAPI } from 'nestjs-zod'
 import {
   fetchRecentQuestionsPageParamSchema,
   fetchRecentQuestionsResponseSchema,
@@ -16,12 +17,17 @@ export class FetchRecentQuestionsController {
   constructor(private prisma: PrismaService) {}
 
   @Get()
+  @ApiQuery({
+    name: 'page',
+    schema: zodToOpenAPI(fetchRecentQuestionsPageParamSchema),
+    required: false,
+  })
   @ApiOkResponse({
-    schema: fetchRecentQuestionsResponseSchema,
+    schema: zodToOpenAPI(fetchRecentQuestionsResponseSchema),
     description: 'Get a list of questions ordened by creation date',
   })
   async handle(
-    @Query('page', new ZodValidationPipe(fetchRecentQuestionsPageParamSchema))
+    @Query('query', new ZodValidationPipe(fetchRecentQuestionsPageParamSchema))
     page: FetchRecentQuestionsPageParamSchema
   ) {
     const perPage = 10

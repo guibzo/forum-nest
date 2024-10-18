@@ -2,9 +2,11 @@ import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import type { UserPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
-import { PrismaService } from '@/infra/prisma/prisma.service'
-import { Body, Controller, Post, UseGuards } from '@nestjs/common'
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import type { ExtendedPrismaClient } from '@/infra/prisma/prisma.create-with-slug'
+import { Body, Controller, Inject, Post, UseGuards } from '@nestjs/common'
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import type { CustomPrismaService } from 'nestjs-prisma'
+import { createZodDto, zodToOpenAPI } from 'nestjs-zod'
 import {
   createQuestionBodySchema,
   createQuestionResponseSchema,
@@ -15,11 +17,15 @@ import {
 @Controller('/questions')
 @UseGuards(JwtAuthGuard)
 export class CreateQuestionController {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    @Inject('PrismaService')
+    private prisma: CustomPrismaService<ExtendedPrismaClient>
+  ) {}
 
   @Post()
+  @ApiBody({ type: createZodDto(createQuestionBodySchema) })
   @ApiOkResponse({
-    schema: createQuestionResponseSchema,
+    schema: zodToOpenAPI(createQuestionResponseSchema),
     description: 'Create a question',
   })
   async handle(
@@ -29,8 +35,9 @@ export class CreateQuestionController {
     const { content, title } = body
     const userId = user.sub
 
-    // @ts-ignore
-    const question = await this.prisma.question.createWithSlug({
+    console.log('USERIDIDSAJDUAJSDHUADHU', userId)
+
+    const question = await this.prisma.client.question.createWithSlug({
       data: {
         authorId: userId,
         title,

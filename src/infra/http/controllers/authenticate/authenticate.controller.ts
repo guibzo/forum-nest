@@ -2,8 +2,9 @@ import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { PrismaService } from '@/infra/prisma/prisma.service'
 import { Body, Controller, Post, UnauthorizedException, UsePipes } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { compare } from 'bcryptjs'
+import { createZodDto, zodToOpenAPI } from 'nestjs-zod'
 import {
   authenticateBodySchema,
   authenticateResponseSchema,
@@ -16,8 +17,9 @@ export class AuthenticateController {
   constructor(private jwt: JwtService, private prisma: PrismaService) {}
 
   @Post()
+  @ApiBody({ type: createZodDto(authenticateBodySchema) })
   @ApiOkResponse({
-    schema: authenticateResponseSchema,
+    schema: zodToOpenAPI(authenticateResponseSchema),
     description: 'Authenticate with email and password',
   })
   @UsePipes(new ZodValidationPipe(authenticateBodySchema))

@@ -11,6 +11,7 @@ import { envSchema } from './env'
       validate: (env) => envSchema.parse(env),
       isGlobal: true,
     }),
+
     HttpModule,
     AuthModule,
   ],
