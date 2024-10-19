@@ -1,6 +1,6 @@
 import { success, type Either } from '@/core/either-failure-or-success'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import type { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { Question } from '@/domain/forum/enterprise/entities//question'
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities//question-attachment'
 import { QuestionAttachmentsList } from '@/domain/forum/enterprise/entities//question-attachments-list'

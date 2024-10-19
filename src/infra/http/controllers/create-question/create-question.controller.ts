@@ -1,4 +1,4 @@
-import type { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/questions/create-question'
+import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/questions/create-question'
 import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import type { UserPayload } from '@/infra/auth/jwt-strategy'
