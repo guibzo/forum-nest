@@ -27,13 +27,61 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     return PrismaQuestionMapper.toDomain(question)
   }
 
-  findBySlug: (slug: string) => Promise<Question | null>
+  async findBySlug(slug: string): Promise<Question | null> {
+    const question = await this.prisma.client.question.findUnique({
+      where: {
+        slug,
+      },
+    })
 
-  findManyRecent: (params: PaginationParams) => Promise<Question[]>
+    if (!question) {
+      return null
+    }
 
-  create: (question: Question) => Promise<void>
+    return PrismaQuestionMapper.toDomain(question)
+  }
 
-  delete: (question: Question) => Promise<void>
+  async findManyRecent({ page }: PaginationParams): Promise<Question[]> {
+    const perPage = 10
+    const skipHowManyItems = (page - 1) * perPage
 
-  save: (question: Question) => Promise<void>
+    const questions = await this.prisma.client.question.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      take: perPage,
+      skip: skipHowManyItems,
+    })
+
+    return questions.map((question) => PrismaQuestionMapper.toDomain(question))
+  }
+
+  async create(question: Question): Promise<void> {
+    const data = PrismaQuestionMapper.toPrisma(question)
+
+    await this.prisma.client.question.create({
+      data,
+    })
+  }
+
+  async save(question: Question): Promise<void> {
+    const data = PrismaQuestionMapper.toPrisma(question)
+
+    await this.prisma.client.question.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    })
+  }
+
+  async delete(question: Question): Promise<void> {
+    const data = PrismaQuestionMapper.toPrisma(question)
+
+    await this.prisma.client.question.delete({
+      where: {
+        id: data.id,
+      },
+    })
+  }
 }

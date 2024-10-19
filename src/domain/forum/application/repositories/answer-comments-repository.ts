@@ -1,5 +1,5 @@
 import type { PaginationParams } from '@/core/repositories/pagination-params'
-import type { AnswerComment } from '../../enterprise/entities/answer-comment'
+import type { AnswerComment } from '@/domain/forum/enterprise/entities//answer-comment'
 
 export type AnswerCommentsRepository = {
   create(answerComment: AnswerComment): Promise<void>
