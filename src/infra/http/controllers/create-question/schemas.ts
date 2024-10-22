@@ -6,7 +6,3 @@ export const createQuestionBodySchema = z.object({
 })
 
 export type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>
-
-export const createQuestionResponseSchema = z.object({
-  id: z.string(),
-})

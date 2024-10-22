@@ -59,8 +59,11 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
   async create(question: Question): Promise<void> {
     const data = PrismaQuestionMapper.toPrisma(question)
 
-    await this.prisma.client.question.create({
+    await this.prisma.client.question.createWithSlug({
       data,
+      sourceField: 'title',
+      targetField: 'slug',
+      unique: true,
     })
   }
 

@@ -5,12 +5,8 @@ import type { UserPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { Body, Controller, Post, UseGuards } from '@nestjs/common'
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { createZodDto, zodToOpenAPI } from 'nestjs-zod'
-import {
-  createQuestionBodySchema,
-  createQuestionResponseSchema,
-  type CreateQuestionBodySchema,
-} from './schemas'
+import { createZodDto } from 'nestjs-zod'
+import { createQuestionBodySchema, type CreateQuestionBodySchema } from './schemas'
 
 @ApiTags('Questions')
 @Controller('/questions')
@@ -21,7 +17,6 @@ export class CreateQuestionController {
   @Post()
   @ApiBody({ type: createZodDto(createQuestionBodySchema) })
   @ApiOkResponse({
-    schema: zodToOpenAPI(createQuestionResponseSchema),
     description: 'Create a question',
   })
   async handle(
