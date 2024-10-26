@@ -1,7 +1,7 @@
 import { Injectable, type OnModuleDestroy, type OnModuleInit } from '@nestjs/common'
 import { PrismaClient } from '@prisma/client'
 import type { CustomPrismaClientFactory } from 'nestjs-prisma'
-import { extendedPrismaClient, type ExtendedPrismaClient } from './prisma.create-with-slug'
+import { getExtendedPrismaClient, type ExtendedPrismaClient } from './get-extended-prisma-client'
 
 @Injectable()
 export class PrismaService
@@ -9,9 +9,7 @@ export class PrismaService
   implements OnModuleInit, OnModuleDestroy, CustomPrismaClientFactory<ExtendedPrismaClient>
 {
   createPrismaClient(): ExtendedPrismaClient {
-    // you could pass options to your `PrismaClient` instance here
-    // Object.assign(this, extendedPrismaClient)
-
+    const extendedPrismaClient = getExtendedPrismaClient()
     return extendedPrismaClient
   }
 

@@ -2,19 +2,18 @@ import type { PaginationParams } from '@/core/repositories/pagination-params'
 import type { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import type { Question } from '@/domain/forum/enterprise/entities/question'
 import { Inject, Injectable } from '@nestjs/common'
-import type { CustomPrismaService } from 'nestjs-prisma'
-import type { ExtendedPrismaClient } from '../../prisma.create-with-slug'
+import type { ExtendedPrismaClient } from '../../get-extended-prisma-client'
 import { PrismaQuestionMapper } from './mappers/prisma-question-mapper'
 
 @Injectable()
 export class PrismaQuestionsRepository implements QuestionsRepository {
   constructor(
     @Inject('PrismaService')
-    private prisma: CustomPrismaService<ExtendedPrismaClient>
+    private prisma: ExtendedPrismaClient
   ) {}
 
   async findById(id: string): Promise<Question | null> {
-    const question = await this.prisma.client.question.findUnique({
+    const question = await this.prisma.question.findUnique({
       where: {
         id,
       },
@@ -28,7 +27,7 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
   }
 
   async findBySlug(slug: string): Promise<Question | null> {
-    const question = await this.prisma.client.question.findUnique({
+    const question = await this.prisma.question.findUnique({
       where: {
         slug,
       },
@@ -45,7 +44,7 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     const perPage = 10
     const skipHowManyItems = (page - 1) * perPage
 
-    const questions = await this.prisma.client.question.findMany({
+    const questions = await this.prisma.question.findMany({
       orderBy: {
         createdAt: 'desc',
       },
@@ -59,7 +58,7 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
   async create(question: Question): Promise<void> {
     const data = PrismaQuestionMapper.toPrisma(question)
 
-    await this.prisma.client.question.createWithSlug({
+    await this.prisma.question.createWithSlug({
       data,
       sourceField: 'title',
       targetField: 'slug',
@@ -70,7 +69,7 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
   async save(question: Question): Promise<void> {
     const data = PrismaQuestionMapper.toPrisma(question)
 
-    await this.prisma.client.question.update({
+    await this.prisma.question.update({
       where: {
         id: data.id,
       },
@@ -81,7 +80,7 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
   async delete(question: Question): Promise<void> {
     const data = PrismaQuestionMapper.toPrisma(question)
 
-    await this.prisma.client.question.delete({
+    await this.prisma.question.delete({
       where: {
         id: data.id,
       },

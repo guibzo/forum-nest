@@ -1,7 +1,7 @@
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { Module } from '@nestjs/common'
 import { CustomPrismaModule } from 'nestjs-prisma'
-import { extendedPrismaClient } from './prisma/prisma.create-with-slug'
+import { getExtendedPrismaClient } from './prisma/get-extended-prisma-client'
 import { PrismaService } from './prisma/prisma.service'
 import {
   PrismaAnswerAttachmentsRepository,
@@ -17,6 +17,7 @@ import {
     CustomPrismaModule.forRootAsync({
       name: 'PrismaService',
       useFactory: () => {
+        const extendedPrismaClient = getExtendedPrismaClient()
         return extendedPrismaClient
       },
     }),
@@ -38,6 +39,7 @@ import {
     CustomPrismaModule.forRootAsync({
       name: 'PrismaService',
       useFactory: () => {
+        const extendedPrismaClient = getExtendedPrismaClient()
         return extendedPrismaClient
       },
     }),

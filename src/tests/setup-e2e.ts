@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client'
+import { getExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import 'dotenv/config'
 import { execSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
 
-const prisma = new PrismaClient()
+const prisma = getExtendedPrismaClient()
 
 const generateUniqueDatabaseURL = (schemaId: string) => {
   // PG "schema"
