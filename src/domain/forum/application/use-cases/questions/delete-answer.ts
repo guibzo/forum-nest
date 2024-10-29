@@ -1,7 +1,7 @@
 import { failure, success, type Either } from '@/core/either-failure-or-success'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import type { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository'
+import { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository'
 
 type DeleteAnswerUseCaseRequest = {
   answerId: string

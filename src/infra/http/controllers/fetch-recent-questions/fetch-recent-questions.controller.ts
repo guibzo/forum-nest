@@ -4,6 +4,7 @@ import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { Controller, Get, Query, UseGuards } from '@nestjs/common'
 import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger'
 import { zodToOpenAPI } from 'nestjs-zod'
+import { HttpQuestionPresenter } from '../../presenters/http-question-presenter'
 import {
   fetchRecentQuestionsPageParamSchema,
   fetchRecentQuestionsResponseSchema,
@@ -33,10 +34,17 @@ export class FetchRecentQuestionsController {
     // const perPage = 10
     // const skipHowManyItems = (page - 1) * perPage
 
-    const questions = await this.fetchRecentQuestionsUseCase.execute({ page })
+    const result = await this.fetchRecentQuestionsUseCase.execute({ page })
+
+    if (!result.value) {
+    }
+
+    const questionsFormatted = result.value?.questions.map((question) =>
+      HttpQuestionPresenter.toHTTP(question)
+    )
 
     return {
-      questions,
+      questions: questionsFormatted,
     }
   }
 }

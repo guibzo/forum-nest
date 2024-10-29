@@ -1,6 +1,6 @@
 import { failure, success, type Either } from '@/core/either-failure-or-success'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import type { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { Question } from '@/domain/forum/enterprise/entities//question'
 
 type GetQuestionBySlugUseCaseRequest = {

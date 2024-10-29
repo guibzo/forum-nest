@@ -1,7 +1,7 @@
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/questions/create-question'
 import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
-import type { UserPayload } from '@/infra/auth/jwt-strategy'
+import { UserPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { Body, Controller, Post, UseGuards } from '@nestjs/common'
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger'

@@ -1,6 +1,6 @@
 import { success, type Either } from '@/core/either-failure-or-success'
-import type { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
-import type { QuestionComment } from '@/domain/forum/enterprise/entities//question-comment'
+import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
+import { QuestionComment } from '@/domain/forum/enterprise/entities//question-comment'
 
 type FetchQuestionCommentsUseCaseRequest = {
   page: number

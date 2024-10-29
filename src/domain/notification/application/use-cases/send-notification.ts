@@ -1,7 +1,7 @@
 import { success, type Either } from '@/core/either-failure-or-success'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Notification } from '../../enterprise/notification'
-import type { NotificationsRepository } from '../repositories/notifications-repository'
+import { NotificationsRepository } from '../repositories/notifications-repository'
 
 export type SendNotificationUseCaseRequest = {
   recipientId: string

@@ -1,6 +1,6 @@
 import { success, type Either } from '@/core/either-failure-or-success'
-import type { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository'
-import type { Answer } from '@/domain/forum/enterprise/entities//answer'
+import { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository'
+import { Answer } from '@/domain/forum/enterprise/entities//answer'
 
 type FetchQuestionAnswersUseCaseRequest = {
   page: number

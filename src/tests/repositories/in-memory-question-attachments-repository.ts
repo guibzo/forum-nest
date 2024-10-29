@@ -1,5 +1,5 @@
-import type { QuestionAttachmenttsRepository } from '@/domain/forum/application/repositories/question-attachments-repository'
-import type { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
+import { QuestionAttachmenttsRepository } from '@/domain/forum/application/repositories/question-attachments-repository'
+import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
 
 export class InMemoryQuestionAttachmentsRepository implements QuestionAttachmenttsRepository {
   public items: QuestionAttachment[] = []

@@ -1,8 +1,8 @@
 import { failure, success, type Either } from '@/core/either-failure-or-success'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import type { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
-import type { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
+import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
 
 type CommentOnQuestionUseCaseRequest = {

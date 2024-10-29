@@ -1,6 +1,6 @@
 import { Injectable, type OnModuleDestroy, type OnModuleInit } from '@nestjs/common'
 import { PrismaClient } from '@prisma/client'
-import type { CustomPrismaClientFactory } from 'nestjs-prisma'
+import { CustomPrismaClientFactory } from 'nestjs-prisma'
 import { getExtendedPrismaClient, type ExtendedPrismaClient } from './get-extended-prisma-client'
 
 @Injectable()

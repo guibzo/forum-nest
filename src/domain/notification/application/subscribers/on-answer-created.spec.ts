@@ -6,7 +6,7 @@ import { InMemoryNotificationsRepository } from '@/tests/repositories/in-memory-
 import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/in-memory-question-attachments-repository'
 import { InMemoryQuestionsRepository } from '@/tests/repositories/in-memory-questions-repository'
 import { waitFor } from '@/tests/utils/wait-for'
-import type { MockInstance } from 'vitest'
+import { MockInstance } from 'vitest'
 import {
   SendNotificationUseCase,
   type SendNotificationUseCaseRequest,

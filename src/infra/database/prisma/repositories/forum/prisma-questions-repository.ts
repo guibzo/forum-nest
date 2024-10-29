@@ -1,9 +1,9 @@
-import type { PaginationParams } from '@/core/repositories/pagination-params'
-import type { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
-import type { Question } from '@/domain/forum/enterprise/entities/question'
+import { PaginationParams } from '@/core/repositories/pagination-params'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
+import { Question } from '@/domain/forum/enterprise/entities/question'
 import { Inject, Injectable } from '@nestjs/common'
-import type { CustomPrismaService } from 'nestjs-prisma'
-import type { ExtendedPrismaClient } from '../../get-extended-prisma-client'
+import { CustomPrismaService } from 'nestjs-prisma'
+import { ExtendedPrismaClient } from '../../get-extended-prisma-client'
 import { PrismaQuestionMapper } from './mappers/prisma-question-mapper'
 
 @Injectable()
