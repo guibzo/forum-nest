@@ -12,6 +12,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
+    "verbatimModuleSyntax": false,
     "skipLibCheck": true,
     "strictNullChecks": true,
     "strict": true,

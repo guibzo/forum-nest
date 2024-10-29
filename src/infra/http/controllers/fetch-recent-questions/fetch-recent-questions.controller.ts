@@ -1,4 +1,4 @@
-import type { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/questions/fetch-recent-questions'
+import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/questions/fetch-recent-questions'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { Controller, Get, Query, UseGuards } from '@nestjs/common'
