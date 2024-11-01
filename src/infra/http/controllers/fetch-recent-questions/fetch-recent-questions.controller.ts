@@ -1,7 +1,7 @@
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/questions/fetch-recent-questions'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
-import { Controller, Get, Query, UseGuards } from '@nestjs/common'
+import { BadRequestException, Controller, Get, Query, UseGuards } from '@nestjs/common'
 import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger'
 import { zodToOpenAPI } from 'nestjs-zod'
 import { HttpQuestionPresenter } from '../../presenters/http-question-presenter'
@@ -31,15 +31,13 @@ export class FetchRecentQuestionsController {
     @Query('query', new ZodValidationPipe(fetchRecentQuestionsPageParamSchema))
     page: FetchRecentQuestionsPageParamSchema
   ) {
-    // const perPage = 10
-    // const skipHowManyItems = (page - 1) * perPage
-
     const result = await this.fetchRecentQuestionsUseCase.execute({ page })
 
-    if (!result.value) {
+    if (result.isFailure()) {
+      throw new BadRequestException()
     }
 
-    const questionsFormatted = result.value?.questions.map((question) =>
+    const questionsFormatted = result.value.questions.map((question) =>
       HttpQuestionPresenter.toHTTP(question)
     )
 

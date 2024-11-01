@@ -8,5 +8,5 @@ export const authenticateBodySchema = z.object({
 export type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 
 export const authenticateResponseSchema = z.object({
-  access_token: z.string(),
+  accessToken: z.string(),
 })
