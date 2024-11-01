@@ -6,7 +6,7 @@ import { EnvService } from './env/env.service'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: ['debug', 'error', 'fatal', 'warn'],
+    logger: [],
   })
 
   patchNestJsSwagger()
