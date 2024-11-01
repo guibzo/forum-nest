@@ -1,5 +1,6 @@
 import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases'
 import { StudentAlreadyExistsError } from '@/domain/forum/application/use-cases/@errors/student-already-exists-error'
+import { Public } from '@/infra/auth/public'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import {
   BadRequestException,
@@ -19,6 +20,7 @@ import {
 
 @ApiTags('Account')
 @Controller('/accounts')
+@Public()
 export class CreateAccountController {
   constructor(private registerStudent: RegisterStudentUseCase) {}
 

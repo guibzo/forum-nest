@@ -1,5 +1,6 @@
 import { WrongCredentialsError } from '@/core/errors/wrong-credentials-error'
 import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases'
+import { Public } from '@/infra/auth/public'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import {
   BadRequestException,
@@ -19,6 +20,7 @@ import {
 
 @ApiTags('Authentication')
 @Controller('/sessions')
+@Public()
 export class AuthenticateController {
   constructor(private authenticateStudent: AuthenticateStudentUseCase) {}
 
