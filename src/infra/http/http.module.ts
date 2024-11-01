@@ -5,6 +5,8 @@ import {
   RegisterStudentUseCase,
 } from '@/domain/forum/application/use-cases'
 import { Module } from '@nestjs/common'
+import { AuthModule } from '../auth/auth.module'
+import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
 import {
   AuthenticateController,
@@ -14,7 +16,7 @@ import {
 } from './controllers'
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, CryptographyModule, AuthModule],
   controllers: [
     CreateAccountController,
     AuthenticateController,

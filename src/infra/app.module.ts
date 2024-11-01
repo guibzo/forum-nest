@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { HttpModule } from './http/http.module'
 
-import { AuthModule } from './auth/auth.module'
 import { envSchema } from './env'
 
 @Module({
@@ -12,7 +11,6 @@ import { envSchema } from './env'
       isGlobal: true,
     }),
     HttpModule,
-    AuthModule,
   ],
 })
 export class AppModule {}
