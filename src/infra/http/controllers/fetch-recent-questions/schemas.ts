@@ -1,14 +1,14 @@
 import { z } from 'zod'
 
-export const fetchRecentQuestionsPageParamSchema = z
+export const fetchRecentQuestionsPageQueryParamSchema = z
   .string()
   .optional()
   .default('1')
   .transform(Number)
   .pipe(z.number().min(1))
 
-export type FetchRecentQuestionsPageParamSchema = z.infer<
-  typeof fetchRecentQuestionsPageParamSchema
+export type FetchRecentQuestionsPageQueryParamSchema = z.infer<
+  typeof fetchRecentQuestionsPageQueryParamSchema
 >
 
 export const fetchRecentQuestionsResponseSchema = z.array(

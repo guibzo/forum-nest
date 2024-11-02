@@ -4,14 +4,13 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
     "start": "nest start",
     "dev": "nest start --watch",
     "debug": "nest start --debug --watch",
     "prod": "node dist/main",
-    "db:migratedev": "prisma migrate dev",
+    "db:migrate:dev": "prisma migrate dev",
     "db:studio": "prisma studio",
     "docker:start": "docker-compose up -d",
     "docker:stop": "docker compose stop",
@@ -22,7 +21,8 @@
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
     "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
-    "test:e2e": "vitest run --config ./vitest.config.e2e.mts"
+    "test:e2e": "vitest run --config ./vitest.config.e2e.mts",
+    "test:e2e:watch": "vitest --config ./vitest.config.e2e.mts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

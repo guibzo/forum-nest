@@ -1,13 +1,13 @@
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/questions/fetch-recent-questions'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
+import { HttpQuestionPresenter } from '@/infra/http/presenters/http-question-presenter'
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common'
 import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger'
 import { zodToOpenAPI } from 'nestjs-zod'
-import { HttpQuestionPresenter } from '../../presenters/http-question-presenter'
 import {
-  fetchRecentQuestionsPageParamSchema,
+  fetchRecentQuestionsPageQueryParamSchema,
   fetchRecentQuestionsResponseSchema,
-  type FetchRecentQuestionsPageParamSchema,
+  type FetchRecentQuestionsPageQueryParamSchema,
 } from './schemas'
 
 @ApiTags('Questions')
@@ -18,16 +18,16 @@ export class FetchRecentQuestionsController {
   @Get()
   @ApiQuery({
     name: 'page',
-    schema: zodToOpenAPI(fetchRecentQuestionsPageParamSchema),
+    schema: zodToOpenAPI(fetchRecentQuestionsPageQueryParamSchema),
     required: false,
   })
   @ApiOkResponse({
     schema: zodToOpenAPI(fetchRecentQuestionsResponseSchema),
-    description: 'Get a list of questions ordened by creation date',
+    description: 'Fetch a list of questions ordened by creation date',
   })
   async handle(
-    @Query('query', new ZodValidationPipe(fetchRecentQuestionsPageParamSchema))
-    page: FetchRecentQuestionsPageParamSchema
+    @Query('query', new ZodValidationPipe(fetchRecentQuestionsPageQueryParamSchema))
+    page: FetchRecentQuestionsPageQueryParamSchema
   ) {
     const result = await this.fetchRecentQuestionsUseCase.execute({ page })
 

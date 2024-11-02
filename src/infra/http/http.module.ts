@@ -9,11 +9,13 @@ import {
   FetchRecentQuestionsUseCase,
   RegisterStudentUseCase,
 } from '@/domain/forum/application/use-cases'
+import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/questions/get-question-by-slug'
 import {
   AuthenticateController,
   CreateAccountController,
   CreateQuestionController,
   FetchRecentQuestionsController,
+  GetQuestionBySlugController,
 } from './controllers'
 
 @Module({
@@ -23,12 +25,14 @@ import {
     AuthenticateController,
     CreateQuestionController,
     FetchRecentQuestionsController,
+    GetQuestionBySlugController,
   ],
   providers: [
     CreateQuestionUseCase,
     FetchRecentQuestionsUseCase,
     RegisterStudentUseCase,
     AuthenticateStudentUseCase,
+    GetQuestionBySlugUseCase,
   ],
 })
 export class HttpModule {}

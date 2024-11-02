@@ -10,6 +10,7 @@ export class HttpQuestionPresenter {
       bestAnswerId: question.bestAnswerId?.toString(),
       createdAt: question.createdAt,
       updatedAt: question.updatedAt,
+      authorId: question.authorId.toString(),
     }
   }
 }
