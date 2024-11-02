@@ -1,9 +1,9 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { AnswerCommentsRepository } from '@/domain/forum/application/repositories/answer-comments-repository'
 import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment'
+import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'
-import { ExtendedPrismaClient } from '../../get-extended-prisma-client'
 import { PrismaAnswerCommentMapper } from './mappers/prisma-answer-comment-mapper'
 
 @Injectable()

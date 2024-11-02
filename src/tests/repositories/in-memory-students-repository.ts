@@ -1,5 +1,5 @@
-import type { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
-import type { Student } from '@/domain/forum/enterprise/entities/student'
+import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
+import { Student } from '@/domain/forum/enterprise/entities/student'
 
 export class InMemoryStudentsRepository implements StudentsRepository {
   public items: Student[] = []

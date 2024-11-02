@@ -1,8 +1,8 @@
 import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
 import { Student } from '@/domain/forum/enterprise/entities/student'
+import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'
-import { ExtendedPrismaClient } from '../../get-extended-prisma-client'
 import { PrismaStudentMapper } from './mappers/prisma-student-mapper'
 
 @Injectable()

@@ -1,8 +1,8 @@
 import { QuestionAttachmenttsRepository } from '@/domain/forum/application/repositories/question-attachments-repository'
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
+import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'
-import { ExtendedPrismaClient } from '../../get-extended-prisma-client'
 import { PrismaQuestionAttachmentMapper } from './mappers/prisma-question-attachment-mapper'
 
 @Injectable()
