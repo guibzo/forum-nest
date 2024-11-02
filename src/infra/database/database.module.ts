@@ -1,5 +1,7 @@
-import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
-import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
+import {
+  QuestionsRepositoryInterface,
+  StudentsRepositoryInterface,
+} from '@/domain/forum/application/repositories'
 import { Module } from '@nestjs/common'
 import { CustomPrismaModule } from 'nestjs-prisma'
 import { getExtendedPrismaClient } from './prisma/get-extended-prisma-client'
@@ -34,11 +36,11 @@ import {
     PrismaAnswerCommentsRepository,
     PrismaAnswerAttachmentsRepository,
     {
-      provide: QuestionsRepository,
+      provide: QuestionsRepositoryInterface,
       useClass: PrismaQuestionsRepository,
     },
     {
-      provide: StudentsRepository,
+      provide: StudentsRepositoryInterface,
       useClass: PrismaStudentsRepository,
     },
   ],
@@ -56,8 +58,8 @@ import {
     PrismaAnswersRepository,
     PrismaAnswerCommentsRepository,
     PrismaAnswerAttachmentsRepository,
-    QuestionsRepository,
-    StudentsRepository,
+    QuestionsRepositoryInterface,
+    StudentsRepositoryInterface,
   ],
 })
 export class DatabaseModule {}

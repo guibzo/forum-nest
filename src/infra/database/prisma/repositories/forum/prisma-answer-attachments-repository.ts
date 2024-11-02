@@ -1,4 +1,4 @@
-import { AnswerAttachmenttsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository'
+import { AnswerAttachmenttsRepositoryInterface } from '@/domain/forum/application/repositories'
 import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-attachment'
 import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import { Inject, Injectable } from '@nestjs/common'
@@ -6,7 +6,7 @@ import { CustomPrismaService } from 'nestjs-prisma'
 import { PrismaAnswerAttachmentMapper } from './mappers/prisma-answer-attachment-mapper'
 
 @Injectable()
-export class PrismaAnswerAttachmentsRepository implements AnswerAttachmenttsRepository {
+export class PrismaAnswerAttachmentsRepository implements AnswerAttachmenttsRepositoryInterface {
   constructor(
     @Inject('PrismaService')
     private prisma: CustomPrismaService<ExtendedPrismaClient>

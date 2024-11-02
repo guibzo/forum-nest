@@ -7,9 +7,9 @@ import {
   AuthenticateStudentUseCase,
   CreateQuestionUseCase,
   FetchRecentQuestionsUseCase,
+  GetQuestionBySlugUseCase,
   RegisterStudentUseCase,
 } from '@/domain/forum/application/use-cases'
-import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/questions/get-question-by-slug'
 import {
   AuthenticateController,
   CreateAccountController,

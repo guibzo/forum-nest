@@ -1,17 +1,17 @@
-import { makeAnswer } from '@/tests/factories/make-answer'
-import { makeQuestion } from '@/tests/factories/make-question'
-import { InMemoryAnswerAttachmentsRepository } from '@/tests/repositories/in-memory-answer-attachments-repository'
-import { InMemoryAnswersRepository } from '@/tests/repositories/in-memory-answers-repository'
-import { InMemoryNotificationsRepository } from '@/tests/repositories/in-memory-notifications-repository'
-import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/in-memory-question-attachments-repository'
-import { InMemoryQuestionsRepository } from '@/tests/repositories/in-memory-questions-repository'
+import { makeAnswer } from '@/tests/factories/answers/make-answer'
+import { makeQuestion } from '@/tests/factories/questions/make-question'
+import { InMemoryAnswerAttachmentsRepository } from '@/tests/repositories/answers/in-memory-answer-attachments-repository'
+import { InMemoryAnswersRepository } from '@/tests/repositories/answers/in-memory-answers-repository'
+import { InMemoryNotificationsRepository } from '@/tests/repositories/notifications/in-memory-notifications-repository'
+import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/questions/in-memory-question-attachments-repository'
+import { InMemoryQuestionsRepository } from '@/tests/repositories/questions/in-memory-questions-repository'
 import { waitFor } from '@/tests/utils/wait-for'
 import { MockInstance } from 'vitest'
 import {
   SendNotificationUseCase,
   type SendNotificationUseCaseRequest,
   type SendNotificationUseCaseResponse,
-} from '../use-cases/send-notification'
+} from '../use-cases/send-notification/use-case'
 import { OnQuestionBestAnswerChosen } from './on-question-best-answer-chosen'
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository

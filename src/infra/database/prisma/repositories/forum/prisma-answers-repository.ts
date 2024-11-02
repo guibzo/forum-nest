@@ -1,5 +1,5 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
-import { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository'
+import { AnswersRepositoryInterface } from '@/domain/forum/application/repositories'
 import { Answer } from '@/domain/forum/enterprise/entities/answer'
 import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import { Inject, Injectable } from '@nestjs/common'
@@ -7,7 +7,7 @@ import { CustomPrismaService } from 'nestjs-prisma'
 import { PrismaAnswerMapper } from './mappers/prisma-answer-mapper'
 
 @Injectable()
-export class PrismaAnswersRepository implements AnswersRepository {
+export class PrismaAnswersRepository implements AnswersRepositoryInterface {
   constructor(
     @Inject('PrismaService')
     private prisma: CustomPrismaService<ExtendedPrismaClient>

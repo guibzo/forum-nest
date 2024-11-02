@@ -1,4 +1,4 @@
-import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/questions/create-question'
+import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases'
 import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'

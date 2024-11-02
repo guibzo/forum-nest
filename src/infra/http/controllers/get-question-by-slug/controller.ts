@@ -1,4 +1,4 @@
-import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/questions/get-question-by-slug'
+import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { HttpQuestionPresenter } from '@/infra/http/presenters/http-question-presenter'
 import { BadRequestException, Controller, Get, Param } from '@nestjs/common'

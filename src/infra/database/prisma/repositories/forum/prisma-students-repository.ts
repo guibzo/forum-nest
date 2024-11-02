@@ -1,4 +1,4 @@
-import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
+import { StudentsRepositoryInterface } from '@/domain/forum/application/repositories'
 import { Student } from '@/domain/forum/enterprise/entities/student'
 import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import { Inject, Injectable } from '@nestjs/common'
@@ -6,7 +6,7 @@ import { CustomPrismaService } from 'nestjs-prisma'
 import { PrismaStudentMapper } from './mappers/prisma-student-mapper'
 
 @Injectable()
-export class PrismaStudentsRepository implements StudentsRepository {
+export class PrismaStudentsRepository implements StudentsRepositoryInterface {
   constructor(
     @Inject('PrismaService')
     private prisma: CustomPrismaService<ExtendedPrismaClient>
