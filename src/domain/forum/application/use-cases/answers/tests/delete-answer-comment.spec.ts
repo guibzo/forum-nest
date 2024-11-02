@@ -1,7 +1,7 @@
 import { Failure, Success } from '@/core/either-failure-or-success'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
-import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases/questions/delete-answer-comment'
+import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases/answers/delete-answer-comment'
 import { makeAnswerComment } from '@/tests/factories/make-answer-comment'
 import { InMemoryAnswerCommentsRepository } from '@/tests/repositories/in-memory-answer-comments-repository'
 

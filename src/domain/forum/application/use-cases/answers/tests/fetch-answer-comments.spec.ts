@@ -1,6 +1,6 @@
 import { Success } from '@/core/either-failure-or-success'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/questions/fetch-answer-comments'
+import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/answers/fetch-answer-comments'
 import { makeAnswerComment } from '@/tests/factories/make-answer-comment'
 import { InMemoryAnswerCommentsRepository } from '@/tests/repositories/in-memory-answer-comments-repository'
 

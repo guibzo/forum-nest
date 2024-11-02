@@ -1,5 +1,5 @@
 import { Success } from '@/core/either-failure-or-success'
-import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/questions/comment-on-answer'
+import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/answers/comment-on-answer'
 import { makeAnswer } from '@/tests/factories/make-answer'
 import { InMemoryAnswerAttachmentsRepository } from '@/tests/repositories/in-memory-answer-attachments-repository'
 import { InMemoryAnswerCommentsRepository } from '@/tests/repositories/in-memory-answer-comments-repository'
