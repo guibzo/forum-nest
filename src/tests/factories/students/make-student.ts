@@ -20,7 +20,7 @@ export const makeStudent = (override: Partial<StudentProps> = {}, id?: UniqueEnt
   return student
 }
 
-// eslint-disable
+/* eslint-disable */
 @Injectable()
 export class StudentFactory {
   constructor(

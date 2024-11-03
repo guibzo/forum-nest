@@ -1,5 +1,7 @@
 import { AppModule } from '@/infra/app.module'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
+import { DatabaseModule } from '@/infra/database/database.module'
+import { QuestionFactory } from '@/tests/factories/questions/make-question'
+import { StudentFactory } from '@/tests/factories/students/make-student'
 import { INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
@@ -7,32 +9,29 @@ import request from 'supertest'
 
 describe('Fetch recent questions (E2E)', () => {
   let app: INestApplication
-  let prisma: PrismaService
+  let studentFactory: StudentFactory
+  let questionFactory: QuestionFactory
   let jwt: JwtService
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, DatabaseModule],
+      providers: [StudentFactory, QuestionFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
 
-    prisma = moduleRef.get(PrismaService)
+    studentFactory = moduleRef.get(StudentFactory)
+    questionFactory = moduleRef.get(QuestionFactory)
     jwt = moduleRef.get(JwtService)
 
     await app.init()
   })
 
   it('should be able to list recent questions', async () => {
-    const user = await prisma.user.create({
-      data: {
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        password: '123456',
-      },
-    })
+    const user = await studentFactory.makePrismaStudent()
 
-    const accessToken = jwt.sign({ sub: user.id })
+    const accessToken = jwt.sign({ sub: user.id.toString() })
 
     const questions = Array.from({ length: 2 }).map((_, i) => ({
       title: `Question ${i} title`,
@@ -41,9 +40,11 @@ describe('Fetch recent questions (E2E)', () => {
       authorId: user.id,
     }))
 
-    await prisma.question.createMany({
-      data: questions,
-    })
+    await Promise.all([
+      questions.map(async (item) => {
+        await questionFactory.makePrismaQuestion({ authorId: user.id, title: item.title })
+      }),
+    ])
 
     const response = await request(app.getHttpServer())
       .get('/questions')

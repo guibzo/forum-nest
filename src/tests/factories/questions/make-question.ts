@@ -20,6 +20,7 @@ export const makeQuestion = (override: Partial<QuestionProps> = {}, id?: UniqueE
   return question
 }
 
+/* eslint-disable */
 @Injectable()
 export class QuestionFactory {
   constructor(
