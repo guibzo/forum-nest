@@ -18,7 +18,7 @@ import {
   authenticateResponseSchema,
 } from './schemas'
 
-@ApiTags('Authentication')
+@ApiTags('Account')
 @Controller('/sessions')
 @Public()
 export class AuthenticateController {

@@ -4,9 +4,10 @@ import { AnswersRepositoryInterface } from '@/domain/forum/application/repositor
 import { Answer } from '@/domain/forum/enterprise/entities/answer'
 import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-attachment'
 import { AnswerAttachmentsList } from '@/domain/forum/enterprise/entities/answer-attachments-list'
+import { Injectable } from '@nestjs/common'
 
 type AnswerQuestionUseCaseRequest = {
-  instructorId: string
+  authorId: string
   questionId: string
   attachmentsIds: string[]
   content: string
@@ -14,18 +15,19 @@ type AnswerQuestionUseCaseRequest = {
 
 type AnswerQuestionUseCaseResponse = Either<null, { answer: Answer }>
 
+@Injectable()
 export class AnswerQuestionUseCase {
   constructor(private answersRepository: AnswersRepositoryInterface) {}
 
   async execute({
     questionId,
-    instructorId,
+    authorId,
     content,
     attachmentsIds,
   }: AnswerQuestionUseCaseRequest): Promise<AnswerQuestionUseCaseResponse> {
     const answer = Answer.create({
       content,
-      authorId: new UniqueEntityID(instructorId),
+      authorId: new UniqueEntityID(authorId),
       questionId: new UniqueEntityID(questionId),
     })
 

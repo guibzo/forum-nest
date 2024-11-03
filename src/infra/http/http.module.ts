@@ -4,19 +4,25 @@ import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
 
 import {
+  AnswerQuestionUseCase,
   AuthenticateStudentUseCase,
   CreateQuestionUseCase,
+  DeleteAnswerUseCase,
   DeleteQuestionUseCase,
+  EditAnswerUseCase,
   EditQuestionUseCase,
   FetchRecentQuestionsUseCase,
   GetQuestionBySlugUseCase,
   RegisterStudentUseCase,
 } from '@/domain/forum/application/use-cases'
 import {
+  AnswerQuestionController,
   AuthenticateController,
   CreateAccountController,
   CreateQuestionController,
+  DeleteAnswerController,
   DeleteQuestionController,
+  EditAnswerController,
   EditQuestionController,
   FetchRecentQuestionsController,
   GetQuestionBySlugController,
@@ -31,7 +37,10 @@ import {
     FetchRecentQuestionsController,
     GetQuestionBySlugController,
     EditQuestionController,
+    EditAnswerController,
     DeleteQuestionController,
+    AnswerQuestionController,
+    DeleteAnswerController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -40,7 +49,10 @@ import {
     AuthenticateStudentUseCase,
     GetQuestionBySlugUseCase,
     EditQuestionUseCase,
+    EditAnswerUseCase,
     DeleteQuestionUseCase,
+    AnswerQuestionUseCase,
+    DeleteAnswerUseCase,
   ],
 })
 export class HttpModule {}
