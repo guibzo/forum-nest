@@ -16,6 +16,7 @@ export class CreateQuestionController {
   @ApiBody({ type: createZodDto(createQuestionBodySchema) })
   @ApiResponse({
     description: 'Create a question',
+    status: 201,
   })
   async handle(
     @Body(new ZodValidationPipe(createQuestionBodySchema)) body: CreateQuestionBodySchema,

@@ -1,60 +1,42 @@
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import { EditQuestionUseCase } from '@/domain/forum/application/use-cases'
+import { DeleteQuestionUseCase } from '@/domain/forum/application/use-cases'
 import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import {
   BadRequestException,
-  Body,
   Controller,
+  Delete,
   ForbiddenException,
   HttpCode,
   NotFoundException,
   Param,
-  Put,
 } from '@nestjs/common'
-import { ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { createZodDto, zodToOpenAPI } from 'nestjs-zod'
-import {
-  editQuestionBodySchema,
-  EditQuestionBodySchema,
-  editQuestionRouteParamSchema,
-  EditQuestionRouteParamSchema,
-} from './schemas'
+import { ApiResponse, ApiTags } from '@nestjs/swagger'
+import { deleteQuestionRouteParamSchema, type DeleteQuestionRouteParamSchema } from './schemas'
 
 @ApiTags('Questions')
 @Controller('/questions/:id')
-export class EditQuestionController {
-  constructor(private editQuestion: EditQuestionUseCase) {}
+export class DeleteQuestionController {
+  constructor(private deleteQuestion: DeleteQuestionUseCase) {}
 
-  @Put()
+  @Delete()
   @HttpCode(204)
-  @ApiBody({ type: createZodDto(editQuestionBodySchema) })
-  @ApiParam({
-    name: 'id',
-    schema: zodToOpenAPI(editQuestionRouteParamSchema),
-    required: true,
-  })
   @ApiResponse({
+    description: 'Delete a question',
     status: 204,
-    description: 'Edit a question',
   })
   async handle(
-    @Body(new ZodValidationPipe(editQuestionBodySchema)) body: EditQuestionBodySchema,
     @CurrentUser() user: UserPayload,
-    @Param('id', new ZodValidationPipe(editQuestionRouteParamSchema))
-    questionId: EditQuestionRouteParamSchema
+    @Param('id', new ZodValidationPipe(deleteQuestionRouteParamSchema))
+    questionId: DeleteQuestionRouteParamSchema
   ) {
-    const { content, title } = body
     const userId = user.sub
 
-    const result = await this.editQuestion.execute({
-      content,
-      title,
-      authorId: userId,
-      attachmentsIds: [],
+    const result = await this.deleteQuestion.execute({
       questionId,
+      authorId: userId,
     })
 
     if (result.isFailure()) {

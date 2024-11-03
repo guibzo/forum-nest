@@ -29,6 +29,7 @@ export class AuthenticateController {
   @ApiResponse({
     schema: zodToOpenAPI(authenticateResponseSchema),
     description: 'Authenticate with email and password',
+    status: 201,
   })
   @UsePipes(new ZodValidationPipe(authenticateBodySchema))
   async handle(@Body() body: AuthenticateBodySchema) {

@@ -29,6 +29,7 @@ export class CreateAccountController {
   @ApiResponse({
     schema: zodToOpenAPI(createAccountResponseSchema),
     description: 'Create account with email and password',
+    status: 201,
   })
   @UsePipes(new ZodValidationPipe(createAccountBodySchema))
   async handle(@Body() body: CreateAccountBodySchema) {
