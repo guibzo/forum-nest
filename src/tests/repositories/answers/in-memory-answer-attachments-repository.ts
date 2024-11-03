@@ -1,7 +1,7 @@
-import { AnswerAttachmenttsRepositoryInterface } from '@/domain/forum/application/repositories'
+import { AnswerAttachmentsRepositoryInterface } from '@/domain/forum/application/repositories'
 import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-attachment'
 
-export class InMemoryAnswerAttachmentsRepository implements AnswerAttachmenttsRepositoryInterface {
+export class InMemoryAnswerAttachmentsRepository implements AnswerAttachmentsRepositoryInterface {
   public items: AnswerAttachment[] = []
 
   async findManyByAnswerId(answerId: string) {

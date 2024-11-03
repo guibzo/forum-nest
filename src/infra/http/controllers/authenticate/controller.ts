@@ -10,7 +10,7 @@ import {
   UnauthorizedException,
   UsePipes,
 } from '@nestjs/common'
-import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { createZodDto, zodToOpenAPI } from 'nestjs-zod'
 import {
   authenticateBodySchema,
@@ -26,7 +26,7 @@ export class AuthenticateController {
 
   @Post()
   @ApiBody({ type: createZodDto(authenticateBodySchema) })
-  @ApiOkResponse({
+  @ApiResponse({
     schema: zodToOpenAPI(authenticateResponseSchema),
     description: 'Authenticate with email and password',
   })

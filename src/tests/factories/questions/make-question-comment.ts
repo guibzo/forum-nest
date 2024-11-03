@@ -28,7 +28,7 @@ export const makeQuestionComment = (
 
 /* eslint-disable */
 @Injectable()
-export class QuestionFactory {
+export class QuestionCommentFactory {
   constructor(
     @Inject('PrismaService')
     private prisma: CustomPrismaService<ExtendedPrismaClient>

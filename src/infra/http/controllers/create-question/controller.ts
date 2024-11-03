@@ -3,7 +3,7 @@ import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common'
-import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { createZodDto } from 'nestjs-zod'
 import { createQuestionBodySchema, type CreateQuestionBodySchema } from './schemas'
 
@@ -14,7 +14,7 @@ export class CreateQuestionController {
 
   @Post()
   @ApiBody({ type: createZodDto(createQuestionBodySchema) })
-  @ApiOkResponse({
+  @ApiResponse({
     description: 'Create a question',
   })
   async handle(

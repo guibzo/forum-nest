@@ -3,12 +3,13 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import {
-  type QuestionAttachmenttsRepositoryInterface,
-  type QuestionsRepositoryInterface,
+  QuestionAttachmentsRepositoryInterface,
+  QuestionsRepositoryInterface,
 } from '@/domain/forum/application/repositories'
 import { Question } from '@/domain/forum/enterprise/entities/question'
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
 import { QuestionAttachmentsList } from '@/domain/forum/enterprise/entities/question-attachments-list'
+import { Injectable } from '@nestjs/common'
 
 type EditQuestionUseCaseRequest = {
   authorId: string
@@ -25,10 +26,11 @@ type EditQuestionUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class EditQuestionUseCase {
   constructor(
     private questionsRepository: QuestionsRepositoryInterface,
-    private questionAttachmentsRepository: QuestionAttachmenttsRepositoryInterface
+    private questionAttachmentsRepository: QuestionAttachmentsRepositoryInterface
   ) {}
 
   async execute({

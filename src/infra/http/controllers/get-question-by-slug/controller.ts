@@ -2,7 +2,7 @@ import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { HttpQuestionPresenter } from '@/infra/http/presenters/http-question-presenter'
 import { BadRequestException, Controller, Get, Param } from '@nestjs/common'
-import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger'
+import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { zodToOpenAPI } from 'nestjs-zod'
 import {
   GetQuestionBySlugRouteParamSchema,
@@ -16,12 +16,12 @@ export class GetQuestionBySlugController {
   constructor(private getQuestionBySlugUseCase: GetQuestionBySlugUseCase) {}
 
   @Get()
-  @ApiQuery({
+  @ApiParam({
     name: 'slug',
     schema: zodToOpenAPI(getQuestionBySlugRouteParamSchema),
     required: true,
   })
-  @ApiOkResponse({
+  @ApiResponse({
     schema: zodToOpenAPI(getQuestionBySlugResponseSchema),
     description: 'Get a question by slug',
   })

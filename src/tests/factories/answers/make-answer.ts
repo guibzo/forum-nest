@@ -22,7 +22,7 @@ export const makeAnswer = (override: Partial<AnswerProps> = {}, id?: UniqueEntit
 
 /* eslint-disable */
 @Injectable()
-export class QuestionFactory {
+export class AnswerFactory {
   constructor(
     @Inject('PrismaService')
     private prisma: CustomPrismaService<ExtendedPrismaClient>

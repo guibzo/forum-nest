@@ -1,7 +1,7 @@
 import { DomainEvents } from '@/core/events/domain-events'
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import {
-  AnswerAttachmenttsRepositoryInterface,
+  AnswerAttachmentsRepositoryInterface,
   AnswersRepositoryInterface,
 } from '@/domain/forum/application/repositories'
 import { Answer } from '@/domain/forum/enterprise/entities/answer'
@@ -9,7 +9,7 @@ import { Answer } from '@/domain/forum/enterprise/entities/answer'
 export class InMemoryAnswersRepository implements AnswersRepositoryInterface {
   public items: Answer[] = []
 
-  constructor(private answerAttachmentsRepository: AnswerAttachmenttsRepositoryInterface) {}
+  constructor(private answerAttachmentsRepository: AnswerAttachmentsRepositoryInterface) {}
 
   async findById(id: string) {
     const answer = this.items.find((item) => item.id.toString() === id)

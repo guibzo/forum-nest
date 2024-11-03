@@ -1,8 +1,8 @@
-import { QuestionAttachmenttsRepositoryInterface } from '@/domain/forum/application/repositories'
+import { QuestionAttachmentsRepositoryInterface } from '@/domain/forum/application/repositories'
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
 
 export class InMemoryQuestionAttachmentsRepository
-  implements QuestionAttachmenttsRepositoryInterface
+  implements QuestionAttachmentsRepositoryInterface
 {
   public items: QuestionAttachment[] = []
 

@@ -6,6 +6,7 @@ import { DatabaseModule } from '../database/database.module'
 import {
   AuthenticateStudentUseCase,
   CreateQuestionUseCase,
+  EditQuestionUseCase,
   FetchRecentQuestionsUseCase,
   GetQuestionBySlugUseCase,
   RegisterStudentUseCase,
@@ -14,6 +15,7 @@ import {
   AuthenticateController,
   CreateAccountController,
   CreateQuestionController,
+  EditQuestionController,
   FetchRecentQuestionsController,
   GetQuestionBySlugController,
 } from './controllers'
@@ -26,6 +28,7 @@ import {
     CreateQuestionController,
     FetchRecentQuestionsController,
     GetQuestionBySlugController,
+    EditQuestionController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -33,6 +36,7 @@ import {
     RegisterStudentUseCase,
     AuthenticateStudentUseCase,
     GetQuestionBySlugUseCase,
+    EditQuestionUseCase,
   ],
 })
 export class HttpModule {}

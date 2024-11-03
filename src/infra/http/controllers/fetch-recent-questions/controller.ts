@@ -2,7 +2,7 @@ import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-case
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import { HttpQuestionPresenter } from '@/infra/http/presenters/http-question-presenter'
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common'
-import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger'
+import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { zodToOpenAPI } from 'nestjs-zod'
 import {
   fetchRecentQuestionsPageQueryParamSchema,
@@ -21,7 +21,7 @@ export class FetchRecentQuestionsController {
     schema: zodToOpenAPI(fetchRecentQuestionsPageQueryParamSchema),
     required: false,
   })
-  @ApiOkResponse({
+  @ApiResponse({
     schema: zodToOpenAPI(fetchRecentQuestionsResponseSchema),
     description: 'Fetch a list of questions ordened by creation date',
   })

@@ -10,7 +10,7 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common'
-import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { createZodDto, zodToOpenAPI } from 'nestjs-zod'
 import {
   createAccountBodySchema,
@@ -26,7 +26,7 @@ export class CreateAccountController {
 
   @Post()
   @ApiBody({ type: createZodDto(createAccountBodySchema) })
-  @ApiOkResponse({
+  @ApiResponse({
     schema: zodToOpenAPI(createAccountResponseSchema),
     description: 'Create account with email and password',
   })

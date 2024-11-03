@@ -3,7 +3,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import {
-  AnswerAttachmenttsRepositoryInterface,
+  AnswerAttachmentsRepositoryInterface,
   AnswersRepositoryInterface,
 } from '@/domain/forum/application/repositories'
 import { Answer } from '@/domain/forum/enterprise/entities//answer'
@@ -27,7 +27,7 @@ type EditAnswerUseCaseResponse = Either<
 export class EditAnswerUseCase {
   constructor(
     private answersRepository: AnswersRepositoryInterface,
-    private answerAttachmentsRepository: AnswerAttachmenttsRepositoryInterface
+    private answerAttachmentsRepository: AnswerAttachmentsRepositoryInterface
   ) {}
 
   async execute({
