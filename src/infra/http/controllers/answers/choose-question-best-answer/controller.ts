@@ -20,7 +20,7 @@ import {
   ChooseQuestionBestAnswerRouteParamSchema,
 } from './schemas'
 
-@ApiTags('Questions')
+@ApiTags('Answers')
 @Controller('/answers/:answerId/choose-as-best')
 export class ChooseQuestionBestAnswerController {
   constructor(private chooseQuestionBestAnswer: ChooseQuestionBestAnswerUseCase) {}
