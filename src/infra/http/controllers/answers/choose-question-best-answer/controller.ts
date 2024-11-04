@@ -1,48 +1,51 @@
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import { DeleteAnswerUseCase } from '@/domain/forum/application/use-cases'
+import { ChooseQuestionBestAnswerUseCase } from '@/domain/forum/application/use-cases'
 import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 import {
   BadRequestException,
   Controller,
-  Delete,
   ForbiddenException,
   HttpCode,
   NotFoundException,
   Param,
+  Patch,
 } from '@nestjs/common'
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { zodToOpenAPI } from 'nestjs-zod'
-import { deleteAnswerRouteParamSchema, type DeleteAnswerRouteParamSchema } from './schemas'
+import {
+  chooseQuestionBestAnswerRouteParamSchema,
+  ChooseQuestionBestAnswerRouteParamSchema,
+} from './schemas'
 
-@ApiTags('Answers')
-@Controller('/answers/:id')
-export class DeleteAnswerController {
-  constructor(private deleteAnswer: DeleteAnswerUseCase) {}
+@ApiTags('Questions')
+@Controller('/answers/:answerId/choose-as-best')
+export class ChooseQuestionBestAnswerController {
+  constructor(private chooseQuestionBestAnswer: ChooseQuestionBestAnswerUseCase) {}
 
-  @Delete()
+  @Patch()
   @HttpCode(204)
-  @ApiResponse({
-    description: 'Delete a question',
-    status: 204,
-  })
   @ApiParam({
-    name: 'id',
-    schema: zodToOpenAPI(deleteAnswerRouteParamSchema),
+    name: 'answerId',
+    schema: zodToOpenAPI(chooseQuestionBestAnswerRouteParamSchema),
     required: true,
+  })
+  @ApiResponse({
+    status: 204,
+    description: 'Choose a question best answer',
   })
   async handle(
     @CurrentUser() user: UserPayload,
-    @Param('id', new ZodValidationPipe(deleteAnswerRouteParamSchema))
-    answerId: DeleteAnswerRouteParamSchema
+    @Param('answerId', new ZodValidationPipe(chooseQuestionBestAnswerRouteParamSchema))
+    answerId: ChooseQuestionBestAnswerRouteParamSchema
   ) {
     const userId = user.sub
 
-    const result = await this.deleteAnswer.execute({
-      answerId,
+    const result = await this.chooseQuestionBestAnswer.execute({
       authorId: userId,
+      answerId,
     })
 
     if (result.isFailure()) {

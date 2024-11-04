@@ -2,6 +2,7 @@ export * from './account/authenticate/controller'
 export * from './account/create-account/controller'
 
 export * from './answers/answer-question/controller'
+export * from './answers/choose-question-best-answer/controller'
 export * from './answers/delete-answer/controller'
 export * from './answers/edit-answer/controller'
 export * from './answers/fetch-question-answers/controller'

@@ -6,6 +6,7 @@ import {
   QuestionsRepositoryInterface,
 } from '@/domain/forum/application/repositories'
 import { Question } from '@/domain/forum/enterprise/entities/question'
+import { Injectable } from '@nestjs/common'
 
 type ChooseQuestionBestAnswerUseCaseRequest = {
   answerId: string
@@ -17,6 +18,7 @@ type ChooseQuestionBestAnswerUseCaseResponse = Either<
   { question: Question }
 >
 
+@Injectable()
 export class ChooseQuestionBestAnswerUseCase {
   constructor(
     private questionsRepository: QuestionsRepositoryInterface,
