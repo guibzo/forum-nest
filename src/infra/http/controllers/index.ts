@@ -4,6 +4,7 @@ export * from './account/create-account/controller'
 export * from './answers/answer-question/controller'
 export * from './answers/delete-answer/controller'
 export * from './answers/edit-answer/controller'
+export * from './answers/fetch-question-answers/controller'
 
 export * from './questions/create-question/controller'
 export * from './questions/delete-question/controller'

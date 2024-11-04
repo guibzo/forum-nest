@@ -11,6 +11,7 @@ import {
   DeleteQuestionUseCase,
   EditAnswerUseCase,
   EditQuestionUseCase,
+  FetchQuestionAnswersUseCase,
   FetchRecentQuestionsUseCase,
   GetQuestionBySlugUseCase,
   RegisterStudentUseCase,
@@ -24,6 +25,7 @@ import {
   DeleteQuestionController,
   EditAnswerController,
   EditQuestionController,
+  FetchQuestionAnswersController,
   FetchRecentQuestionsController,
   GetQuestionBySlugController,
 } from './controllers'
@@ -41,6 +43,7 @@ import {
     DeleteQuestionController,
     AnswerQuestionController,
     DeleteAnswerController,
+    FetchQuestionAnswersController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -53,6 +56,7 @@ import {
     DeleteQuestionUseCase,
     AnswerQuestionUseCase,
     DeleteAnswerUseCase,
+    FetchQuestionAnswersUseCase,
   ],
 })
 export class HttpModule {}
