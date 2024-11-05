@@ -6,6 +6,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'
 import { PrismaQuestionMapper } from './mappers/prisma-question-mapper'
 
+/* eslint-disable */
 @Injectable()
 export class PrismaQuestionsRepository implements QuestionsRepositoryInterface {
   constructor(

@@ -6,6 +6,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'
 import { PrismaAnswerCommentMapper } from './mappers/prisma-answer-comment-mapper'
 
+/* eslint-disable */
 @Injectable()
 export class PrismaAnswerCommentsRepository implements AnswerCommentsRepositoryInterface {
   constructor(

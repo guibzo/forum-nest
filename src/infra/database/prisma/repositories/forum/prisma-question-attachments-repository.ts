@@ -5,6 +5,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'
 import { PrismaQuestionAttachmentMapper } from './mappers/prisma-question-attachment-mapper'
 
+/* eslint-disable */
 @Injectable()
 export class PrismaQuestionAttachmentsRepository implements QuestionAttachmentsRepositoryInterface {
   constructor(

@@ -10,6 +10,7 @@ import {
   CommentOnAnswerUseCase,
   CommentOnQuestionUseCase,
   CreateQuestionUseCase,
+  DeleteAnswerCommentUseCase,
   DeleteAnswerUseCase,
   DeleteQuestionCommentUseCase,
   DeleteQuestionUseCase,
@@ -28,6 +29,7 @@ import {
   CommentOnQuestionController,
   CreateAccountController,
   CreateQuestionController,
+  DeleteAnswerCommentController,
   DeleteAnswerController,
   DeleteQuestionCommentController,
   DeleteQuestionController,
@@ -56,6 +58,7 @@ import {
     CommentOnQuestionController,
     CommentOnAnswerController,
     DeleteQuestionCommentController,
+    DeleteAnswerCommentController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -73,6 +76,7 @@ import {
     CommentOnQuestionUseCase,
     DeleteQuestionCommentUseCase,
     CommentOnAnswerUseCase,
+    DeleteAnswerCommentUseCase,
   ],
 })
 export class HttpModule {}

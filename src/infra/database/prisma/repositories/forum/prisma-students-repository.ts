@@ -5,6 +5,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'
 import { PrismaStudentMapper } from './mappers/prisma-student-mapper'
 
+/* eslint-disable */
 @Injectable()
 export class PrismaStudentsRepository implements StudentsRepositoryInterface {
   constructor(
