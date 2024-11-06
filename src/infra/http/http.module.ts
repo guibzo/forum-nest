@@ -16,6 +16,7 @@ import {
   DeleteQuestionUseCase,
   EditAnswerUseCase,
   EditQuestionUseCase,
+  FetchAnswerCommentsUseCase,
   FetchQuestionAnswersUseCase,
   FetchQuestionCommentsUseCase,
   FetchRecentQuestionsUseCase,
@@ -36,6 +37,7 @@ import {
   DeleteQuestionController,
   EditAnswerController,
   EditQuestionController,
+  FetchAnswerCommentsController,
   FetchQuestionAnswersController,
   FetchRecentQuestionsController,
   GetQuestionBySlugController,
@@ -62,6 +64,7 @@ import { FetchQuestionCommentsController } from './controllers/questions/fetch-q
     DeleteQuestionCommentController,
     DeleteAnswerCommentController,
     FetchQuestionCommentsController,
+    FetchAnswerCommentsController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -81,6 +84,7 @@ import { FetchQuestionCommentsController } from './controllers/questions/fetch-q
     CommentOnAnswerUseCase,
     DeleteAnswerCommentUseCase,
     FetchQuestionCommentsUseCase,
+    FetchAnswerCommentsUseCase,
   ],
 })
 export class HttpModule {}

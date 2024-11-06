@@ -7,6 +7,7 @@ export * from './answers/comment-on-answer/controller'
 export * from './answers/delete-answer-comment/controller'
 export * from './answers/delete-answer/controller'
 export * from './answers/edit-answer/controller'
+export * from './answers/fetch-answer-comments/controller'
 export * from './answers/fetch-question-answers/controller'
 
 export * from './questions/comment-on-question/controller'
