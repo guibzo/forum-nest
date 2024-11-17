@@ -1,7 +1,11 @@
+import { config } from 'dotenv'
+
 import { getExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
-import 'dotenv/config'
 import { execSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
+
+config({ path: '.env', override: true })
+config({ path: '.env.test', override: true })
 
 const prisma = getExtendedPrismaClient()
 

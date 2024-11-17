@@ -1,4 +1,6 @@
+import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use-cases'
 import {
+  BadRequestException,
   Controller,
   FileTypeValidator,
   MaxFileSizeValidator,
@@ -15,7 +17,7 @@ import { uploadAttachmentResponseSchema } from './schemas'
 @ApiTags('Attachments')
 @Controller('/attachments')
 export class UploadAttachmentController {
-  // constructor(private uploadAttachmentUseCase: UploadAttachmentUseCase) {}
+  constructor(private uploadAndCreateAttachmentUseCase: UploadAndCreateAttachmentUseCase) {}
 
   @Post()
   @ApiResponse({
@@ -36,6 +38,20 @@ export class UploadAttachmentController {
     )
     file: Express.Multer.File
   ) {
-    console.log(file)
+    const result = await this.uploadAndCreateAttachmentUseCase.execute({
+      fileName: file.originalname,
+      fileType: file.mimetype,
+      body: file.buffer,
+    })
+
+    if (result.isFailure()) {
+      throw new BadRequestException()
+    }
+
+    const { attachment } = result.value
+
+    return {
+      attachmentId: attachment.id.toString(),
+    }
   }
 }

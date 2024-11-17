@@ -7,3 +7,5 @@ export * from './forum/prisma-question-comments-repository'
 export * from './forum/prisma-questions-repository'
 
 export * from './forum/prisma-students-repository'
+
+export * from './forum/prisma-attachments-repository'

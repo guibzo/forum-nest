@@ -1,6 +1,6 @@
 import { failure, success, type Either } from '@/core/either-failure-or-success'
 import { InvalidAttachmentTypeError } from '@/core/errors/invalid-attachment-type'
-import type { UploaderInterface } from '@/domain/forum/application/gateways/storage/uploader'
+import { UploaderInterface } from '@/domain/forum/application/gateways/storage/uploader'
 import { AttachmentsRepositoryInterface } from '@/domain/forum/application/repositories'
 import { Attachment } from '@/domain/forum/enterprise/entities/attachment'
 import { Injectable } from '@nestjs/common'

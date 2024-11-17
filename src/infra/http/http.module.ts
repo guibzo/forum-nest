@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { AuthModule } from '../auth/auth.module'
 import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
+import { StorageModule } from '../storage/storage.module'
 
 import {
   AnswerQuestionUseCase,
@@ -24,6 +25,7 @@ import {
   RegisterStudentUseCase,
   UploadAndCreateAttachmentUseCase,
 } from '@/domain/forum/application/use-cases'
+
 import {
   AnswerQuestionController,
   AuthenticateController,
@@ -47,7 +49,7 @@ import {
 } from './controllers'
 
 @Module({
-  imports: [DatabaseModule, CryptographyModule, AuthModule],
+  imports: [DatabaseModule, CryptographyModule, AuthModule, StorageModule],
   controllers: [
     CreateAccountController,
     AuthenticateController,

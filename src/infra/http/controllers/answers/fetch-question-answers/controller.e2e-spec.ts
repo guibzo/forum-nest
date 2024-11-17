@@ -45,15 +45,15 @@ describe('Fetch question answers (E2E)', () => {
       questionId: question.id,
     }))
 
-    await Promise.all([
+    await Promise.all(
       answers.map(async (item) => {
         await answerFactory.makePrismaAnswer({
           authorId: user.id,
           content: item.content,
           questionId: item.questionId,
         })
-      }),
-    ])
+      })
+    )
 
     const response = await request(app.getHttpServer())
       .get(`/questions/${questionId}/answers`)

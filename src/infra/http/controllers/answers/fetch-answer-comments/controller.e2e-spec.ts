@@ -54,15 +54,15 @@ describe('Fetch answer comments (E2E)', () => {
       questionId: question.id,
     }))
 
-    await Promise.all([
+    await Promise.all(
       comments.map(async (item) => {
         await answerCommentFactory.makePrismaAnswerComment({
           authorId: user.id,
           content: item.content,
           answerId: answer.id,
         })
-      }),
-    ])
+      })
+    )
 
     const response = await request(app.getHttpServer())
       .get(`/answers/${answerId}/comments`)

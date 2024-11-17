@@ -17,6 +17,7 @@ import {
   PrismaAnswerAttachmentsRepository,
   PrismaAnswerCommentsRepository,
   PrismaAnswersRepository,
+  PrismaAttachmentsRepository,
   PrismaQuestionAttachmentsRepository,
   PrismaQuestionCommentsRepository,
   PrismaQuestionsRepository,
@@ -70,6 +71,10 @@ import {
     {
       provide: StudentsRepositoryInterface,
       useClass: PrismaStudentsRepository,
+    },
+    {
+      useClass: PrismaAttachmentsRepository,
+      provide: AttachmentsRepositoryInterface,
     },
   ],
   exports: [

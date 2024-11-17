@@ -40,11 +40,11 @@ describe('Fetch recent questions (E2E)', () => {
       authorId: user.id,
     }))
 
-    await Promise.all([
+    await Promise.all(
       questions.map(async (item) => {
         await questionFactory.makePrismaQuestion({ authorId: user.id, title: item.title })
-      }),
-    ])
+      })
+    )
 
     const response = await request(app.getHttpServer())
       .get('/questions')
@@ -53,14 +53,13 @@ describe('Fetch recent questions (E2E)', () => {
 
     expect(response.status).toBe(200)
     expect(response.body).toEqual({
-      questions: expect.arrayContaining([
-        expect.objectContaining({
-          title: questions[0].title,
-        }),
-        expect.objectContaining({
-          title: questions[1].title,
-        }),
-      ]),
+      questions: expect.arrayContaining(
+        questions.map((question) =>
+          expect.objectContaining({
+            title: question.title,
+          })
+        )
+      ),
     })
   })
 })
