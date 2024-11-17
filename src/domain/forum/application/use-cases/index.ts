@@ -1,10 +1,10 @@
+export * from './answers/choose-question-best-answer/use-case'
 export * from './answers/comment-on-answer/use-case'
 export * from './answers/delete-answer-comment/use-case'
 export * from './answers/delete-answer/use-case'
 export * from './answers/edit-answer/use-case'
 export * from './answers/fetch-answer-comments/use-case'
 
-export * from './answers/choose-question-best-answer/use-case'
 export * from './questions/answer-question/use-case'
 export * from './questions/comment-on-question/use-case'
 export * from './questions/create-question/use-case'
@@ -18,3 +18,5 @@ export * from './questions/get-question-by-slug/use-case'
 
 export * from './students/authenticate-student/use-case'
 export * from './students/register-student/use-case'
+
+export * from './attachments/upload-and-create-attachment/use-case'

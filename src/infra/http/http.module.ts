@@ -22,6 +22,7 @@ import {
   FetchRecentQuestionsUseCase,
   GetQuestionBySlugUseCase,
   RegisterStudentUseCase,
+  UploadAndCreateAttachmentUseCase,
 } from '@/domain/forum/application/use-cases'
 import {
   AnswerQuestionController,
@@ -39,10 +40,11 @@ import {
   EditQuestionController,
   FetchAnswerCommentsController,
   FetchQuestionAnswersController,
+  FetchQuestionCommentsController,
   FetchRecentQuestionsController,
   GetQuestionBySlugController,
+  UploadAttachmentController,
 } from './controllers'
-import { FetchQuestionCommentsController } from './controllers/questions/fetch-question-comments/controller'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, AuthModule],
@@ -65,6 +67,7 @@ import { FetchQuestionCommentsController } from './controllers/questions/fetch-q
     DeleteAnswerCommentController,
     FetchQuestionCommentsController,
     FetchAnswerCommentsController,
+    UploadAttachmentController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -85,6 +88,7 @@ import { FetchQuestionCommentsController } from './controllers/questions/fetch-q
     DeleteAnswerCommentUseCase,
     FetchQuestionCommentsUseCase,
     FetchAnswerCommentsUseCase,
+    UploadAndCreateAttachmentUseCase,
   ],
 })
 export class HttpModule {}

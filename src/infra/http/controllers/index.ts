@@ -15,5 +15,8 @@ export * from './questions/create-question/controller'
 export * from './questions/delete-question-comment/controller'
 export * from './questions/delete-question/controller'
 export * from './questions/edit-question/controller'
+export * from './questions/fetch-question-comments/controller'
 export * from './questions/fetch-recent-questions/controller'
 export * from './questions/get-question-by-slug/controller'
+
+export * from './attachments/upload-attachment/controller'
