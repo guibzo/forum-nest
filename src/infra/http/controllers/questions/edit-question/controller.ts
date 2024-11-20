@@ -46,14 +46,14 @@ export class EditQuestionController {
     @Param('id', new ZodValidationPipe(editQuestionRouteParamSchema))
     questionId: EditQuestionRouteParamSchema
   ) {
-    const { content, title } = body
+    const { content, title, attachmentsIds } = body
     const userId = user.sub
 
     const result = await this.editQuestion.execute({
       content,
       title,
       authorId: userId,
-      attachmentsIds: [],
+      attachmentsIds,
       questionId,
     })
 

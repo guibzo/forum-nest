@@ -1,7 +1,7 @@
 import { AppModule } from '@/infra/app.module'
 import { DatabaseModule } from '@/infra/database/database.module'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
-import { AttachmentFactory } from '@/tests/factories/attachments/make-question-attachment'
+import { AttachmentFactory } from '@/tests/factories/attachments/make-attachment'
 import { StudentFactory } from '@/tests/factories/students/make-student'
 import { INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
@@ -36,8 +36,8 @@ describe('Create question (E2E)', () => {
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
-    const attachment1 = await attachmentFactory.makeAttachment()
-    const attachment2 = await attachmentFactory.makeAttachment()
+    const attachment1 = await attachmentFactory.makePrismaAttachment()
+    const attachment2 = await attachmentFactory.makePrismaAttachment()
 
     const response = await request(app.getHttpServer())
       .post('/questions')

@@ -7,6 +7,7 @@ export type EditQuestionRouteParamSchema = z.infer<typeof editQuestionRouteParam
 export const editQuestionBodySchema = z.object({
   title: z.string(),
   content: z.string(),
+  attachmentsIds: z.array(z.string().uuid()),
 })
 
 export type EditQuestionBodySchema = z.infer<typeof editQuestionBodySchema>

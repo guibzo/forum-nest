@@ -1,39 +1,50 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { Attachment, type AttachmentProps } from '@/domain/forum/enterprise/entities/attachment'
-import type { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
-import { PrismaAttachmentMapper } from '@/infra/database/prisma/repositories/forum/mappers/prisma-attachment-mapper'
-import { faker } from '@faker-js/faker'
+import {
+  QuestionAttachment,
+  QuestionAttachmentProps,
+} from '@/domain/forum/enterprise/entities/question-attachment'
+import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import { Inject, Injectable } from '@nestjs/common'
-import type { CustomPrismaService } from 'nestjs-prisma'
+import { CustomPrismaService } from 'nestjs-prisma'
 
-export const makeAttachment = (override: Partial<AttachmentProps> = {}, id?: UniqueEntityID) => {
-  const attachment = Attachment.create(
+export const makeQuestionAttachment = (
+  override: Partial<QuestionAttachmentProps> = {},
+  id?: UniqueEntityID
+) => {
+  const questionAttachment = QuestionAttachment.create(
     {
-      title: faker.lorem.words(),
-      url: faker.lorem.slug(),
+      questionId: new UniqueEntityID(),
+      attachmentId: new UniqueEntityID(),
       ...override,
     },
     id
   )
 
-  return attachment
+  return questionAttachment
 }
 
 /* eslint-disable */
 @Injectable()
-export class AttachmentFactory {
+export class QuestionAttachmentFactory {
   constructor(
     @Inject('PrismaService')
     private prisma: CustomPrismaService<ExtendedPrismaClient>
   ) {}
 
-  async makeAttachment(data: Partial<AttachmentProps> = {}): Promise<Attachment> {
-    const attachment = makeAttachment(data)
+  async makePrismaQuestionAttachment(
+    data: Partial<QuestionAttachmentProps> = {}
+  ): Promise<QuestionAttachment> {
+    const questionAttachment = makeQuestionAttachment(data)
 
-    await this.prisma.client.attachment.create({
-      data: PrismaAttachmentMapper.toPrisma(attachment),
+    await this.prisma.client.attachment.update({
+      where: {
+        id: questionAttachment.attachmentId.toString(),
+      },
+      data: {
+        questionId: questionAttachment.questionId.toString(),
+      },
     })
 
-    return attachment
+    return questionAttachment
   }
 }
