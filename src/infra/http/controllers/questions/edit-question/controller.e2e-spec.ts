@@ -42,46 +42,55 @@ describe('Edit question (E2E)', () => {
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
-    const attachment1 = await attachmentFactory.makePrismaAttachment()
-    const attachment2 = await attachmentFactory.makePrismaAttachment()
+    const [attachment1, attachment2, attachment3] = await Promise.all([
+      attachmentFactory.makePrismaAttachment(),
+      attachmentFactory.makePrismaAttachment(),
+      attachmentFactory.makePrismaAttachment(),
+    ])
 
     const question = await questionFactory.makePrismaQuestion({ authorId: user.id })
     const questionId = question.id.toString()
 
-    await questionAttachmentFactory.makePrismaQuestionAttachment({
-      questionId: question.id,
-      attachmentId: attachment1.id,
-    })
-    await questionAttachmentFactory.makePrismaQuestionAttachment({
-      questionId: question.id,
-      attachmentId: attachment2.id,
-    })
+    await Promise.all([
+      questionAttachmentFactory.makePrismaQuestionAttachment({
+        questionId: question.id,
+        attachmentId: attachment1.id,
+      }),
+      questionAttachmentFactory.makePrismaQuestionAttachment({
+        questionId: question.id,
+        attachmentId: attachment2.id,
+      }),
+    ])
 
-    const attachment3 = await attachmentFactory.makePrismaAttachment()
+    const updatedTitle = 'New question title'
+    const updatedContent = 'New question content'
 
     const response = await request(app.getHttpServer())
       .put(`/questions/${questionId}`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
-        title: 'New question title',
-        content: 'New question content',
+        title: updatedTitle,
+        content: updatedContent,
         attachmentsIds: [attachment1.id.toString(), attachment3.id.toString()],
       })
 
     expect(response.status).toBe(204)
 
-    const questionOnDB = await prisma.question.findFirst({
+    const updatedQuestionOnDB = await prisma.question.findFirst({
       where: {
         title: 'New question title',
         content: 'New question content',
       },
     })
 
-    expect(questionOnDB).toBeTruthy()
+    expect(updatedQuestionOnDB).toMatchObject({
+      title: updatedTitle,
+      content: updatedContent,
+    })
 
     const attachmentsOnDB = await prisma.attachment.findMany({
       where: {
-        questionId: questionOnDB?.id,
+        questionId: updatedQuestionOnDB?.id,
       },
     })
 
