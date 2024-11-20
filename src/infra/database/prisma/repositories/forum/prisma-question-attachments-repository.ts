@@ -13,6 +13,28 @@ export class PrismaQuestionAttachmentsRepository implements QuestionAttachmentsR
     private prisma: CustomPrismaService<ExtendedPrismaClient>
   ) {}
 
+  async createMany(attachments: QuestionAttachment[]): Promise<void> {
+    if (attachments.length === 0) return
+
+    const data = await PrismaQuestionAttachmentMapper.toPrismaUpdateMany(attachments)
+
+    await this.prisma.client.attachment.updateMany(data)
+  }
+
+  async deleteMany(attachments: QuestionAttachment[]): Promise<void> {
+    if (attachments.length === 0) return
+
+    const attachmentIds = attachments.map((attachment) => attachment.id.toString())
+
+    await this.prisma.client.attachment.deleteMany({
+      where: {
+        id: {
+          in: attachmentIds,
+        },
+      },
+    })
+  }
+
   async findManyByQuestionId(questionId: string): Promise<QuestionAttachment[]> {
     const answerAttachemnts = await this.prisma.client.attachment.findMany({
       where: {

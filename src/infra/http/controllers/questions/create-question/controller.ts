@@ -22,14 +22,14 @@ export class CreateQuestionController {
     @Body(new ZodValidationPipe(createQuestionBodySchema)) body: CreateQuestionBodySchema,
     @CurrentUser() user: UserPayload
   ) {
-    const { content, title } = body
+    const { content, title, attachmentsIds } = body
     const userId = user.sub
 
     const result = await this.createQuestion.execute({
       content,
       title,
       authorId: userId,
-      attachmentsIds: [],
+      attachmentsIds,
     })
 
     if (result.isFailure()) {

@@ -49,10 +49,6 @@ import {
       provide: QuestionCommentsRepositoryInterface,
     },
     {
-      useClass: PrismaQuestionAttachmentsRepository,
-      provide: QuestionAttachmentsRepositoryInterface,
-    },
-    {
       useClass: PrismaAnswersRepository,
       provide: AnswersRepositoryInterface,
     },
@@ -76,6 +72,10 @@ import {
       useClass: PrismaAttachmentsRepository,
       provide: AttachmentsRepositoryInterface,
     },
+    {
+      useClass: PrismaQuestionAttachmentsRepository,
+      provide: QuestionAttachmentsRepositoryInterface,
+    },
   ],
   exports: [
     CustomPrismaModule.forRootAsync({
@@ -89,8 +89,8 @@ import {
     AnswerAttachmentsRepositoryInterface,
     AttachmentsRepositoryInterface,
     AnswerCommentsRepositoryInterface,
-    AnswersRepositoryInterface,
     QuestionAttachmentsRepositoryInterface,
+    AnswersRepositoryInterface,
     QuestionCommentsRepositoryInterface,
     QuestionsRepositoryInterface,
     StudentsRepositoryInterface,
