@@ -15,4 +15,14 @@ export class InMemoryAnswerAttachmentsRepository implements AnswerAttachmentsRep
 
     this.items = answerAttachments
   }
+
+  async createMany(attachments: AnswerAttachment[]) {
+    this.items.push(...attachments)
+  }
+
+  async deleteMany(attachments: AnswerAttachment[]) {
+    this.items = this.items.filter((item) => {
+      return !attachments.some((attachment) => attachment.equals(item))
+    })
+  }
 }

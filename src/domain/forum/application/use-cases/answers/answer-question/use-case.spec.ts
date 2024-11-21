@@ -15,7 +15,7 @@ describe('Answer question', () => {
     sut = new AnswerQuestionUseCase(inMemoryAnswersRepository)
   })
 
-  it('should be able to create a Answer', async () => {
+  it('should be able to create a answer', async () => {
     const result = await sut.execute({
       questionId: '1',
       authorId: 'author-1',
@@ -29,5 +29,22 @@ describe('Answer question', () => {
       expect.objectContaining({ attachmentId: new UniqueEntityID('attachment-1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityID('attachment-2') }),
     ])
+  })
+
+  it('should persist attachments when creating a new answer', async () => {
+    const result = await sut.execute({
+      authorId: '1',
+      questionId: '1',
+      content: 'Test content',
+      attachmentsIds: ['attachment-1', 'attachment-2'],
+    })
+
+    expect(result).toBeInstanceOf(Success)
+    expect(inMemoryAnswerAttachmentsRepository.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ attachmentId: new UniqueEntityID('attachment-1') }),
+        expect.objectContaining({ attachmentId: new UniqueEntityID('attachment-2') }),
+      ])
+    )
   })
 })

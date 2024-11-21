@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Attachment, type AttachmentProps } from '@/domain/forum/enterprise/entities/attachment'
 import type { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
-import { PrismaAttachmentMapper } from '@/infra/database/prisma/repositories/forum/mappers/prisma-attachment-mapper'
+import { PrismaAttachmentMapper } from '@/infra/database/prisma/repositories/forum/attachments/mappers/prisma-attachment-mapper'
 import { faker } from '@faker-js/faker'
 import { Inject, Injectable } from '@nestjs/common'
 import type { CustomPrismaService } from 'nestjs-prisma'

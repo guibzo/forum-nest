@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Question, QuestionProps } from '@/domain/forum/enterprise/entities/question'
 import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
-import { PrismaQuestionMapper } from '@/infra/database/prisma/repositories/forum/mappers/prisma-question-mapper'
+import { PrismaQuestionMapper } from '@/infra/database/prisma/repositories/forum/questions/mappers/prisma-question-mapper'
 import { faker } from '@faker-js/faker'
 import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'

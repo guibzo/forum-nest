@@ -5,7 +5,7 @@ export * from './answers/delete-answer/use-case'
 export * from './answers/edit-answer/use-case'
 export * from './answers/fetch-answer-comments/use-case'
 
-export * from './questions/answer-question/use-case'
+export * from './answers/answer-question/use-case'
 export * from './questions/comment-on-question/use-case'
 export * from './questions/create-question/use-case'
 export * from './questions/delete-question-comment/use-case'

@@ -4,7 +4,7 @@ import {
   type QuestionCommentProps,
 } from '@/domain/forum/enterprise/entities/question-comment'
 import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
-import { PrismaQuestionCommentMapper } from '@/infra/database/prisma/repositories/forum/mappers/prisma-question-comment-mapper'
+import { PrismaQuestionCommentMapper } from '@/infra/database/prisma/repositories/forum/questions/mappers/prisma-question-comment-mapper'
 import { faker } from '@faker-js/faker'
 import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'

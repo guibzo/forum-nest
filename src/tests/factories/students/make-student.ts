@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Student, StudentProps } from '@/domain/forum/enterprise/entities/student'
 import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
-import { PrismaStudentMapper } from '@/infra/database/prisma/repositories/forum/mappers/prisma-student-mapper'
+import { PrismaStudentMapper } from '@/infra/database/prisma/repositories/forum/account/mappers/prisma-student-mapper'
 import { faker } from '@faker-js/faker'
 import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'

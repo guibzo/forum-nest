@@ -36,8 +36,10 @@ describe('Create question (E2E)', () => {
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
-    const attachment1 = await attachmentFactory.makePrismaAttachment()
-    const attachment2 = await attachmentFactory.makePrismaAttachment()
+    const [attachment1, attachment2] = await Promise.all([
+      attachmentFactory.makePrismaAttachment(),
+      attachmentFactory.makePrismaAttachment(),
+    ])
 
     const response = await request(app.getHttpServer())
       .post('/questions')

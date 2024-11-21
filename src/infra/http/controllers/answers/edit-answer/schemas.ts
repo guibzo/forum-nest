@@ -6,6 +6,7 @@ export type EditAnswerRouteParamSchema = z.infer<typeof editAnswerRouteParamSche
 
 export const editAnswerBodySchema = z.object({
   content: z.string(),
+  attachmentsIds: z.array(z.string().uuid()),
 })
 
 export type EditAnswerBodySchema = z.infer<typeof editAnswerBodySchema>

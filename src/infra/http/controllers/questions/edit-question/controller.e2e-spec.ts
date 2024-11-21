@@ -2,8 +2,8 @@ import { AppModule } from '@/infra/app.module'
 import { DatabaseModule } from '@/infra/database/database.module'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { AttachmentFactory } from '@/tests/factories/attachments/make-attachment'
-import { QuestionAttachmentFactory } from '@/tests/factories/attachments/make-question-attachment'
 import { QuestionFactory } from '@/tests/factories/questions/make-question'
+import { QuestionAttachmentFactory } from '@/tests/factories/questions/make-question-attachment'
 import { StudentFactory } from '@/tests/factories/students/make-student'
 import { INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
@@ -78,8 +78,8 @@ describe('Edit question (E2E)', () => {
 
     const updatedQuestionOnDB = await prisma.question.findFirst({
       where: {
-        title: 'New question title',
-        content: 'New question content',
+        title: updatedTitle,
+        content: updatedContent,
       },
     })
 

@@ -29,14 +29,14 @@ export class AnswerQuestionController {
     @Param('questionId', new ZodValidationPipe(answerQuestionRouteParamSchema))
     questionId: AnswerQuestionRouteParamSchema
   ) {
-    const { content } = body
+    const { content, attachmentsIds } = body
     const userId = user.sub
 
     const result = await this.answerQuestion.execute({
       content,
       questionId,
       authorId: userId,
-      attachmentsIds: [],
+      attachmentsIds,
     })
 
     if (result.isFailure()) {

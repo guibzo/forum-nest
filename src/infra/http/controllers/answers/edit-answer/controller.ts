@@ -46,14 +46,14 @@ export class EditAnswerController {
     @Param('id', new ZodValidationPipe(editAnswerRouteParamSchema))
     answerId: EditAnswerRouteParamSchema
   ) {
-    const { content } = body
+    const { content, attachmentsIds } = body
     const userId = user.sub
 
     const result = await this.editAnswer.execute({
       answerId,
       content,
       authorId: userId,
-      attachmentsIds: [],
+      attachmentsIds,
     })
 
     if (result.isFailure()) {

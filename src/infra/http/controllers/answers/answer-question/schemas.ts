@@ -6,6 +6,7 @@ export type AnswerQuestionRouteParamSchema = z.infer<typeof answerQuestionRouteP
 
 export const answerQuestionBodySchema = z.object({
   content: z.string(),
+  attachmentsIds: z.array(z.string().uuid()).default([]),
 })
 
 export type AnswerQuestionBodySchema = z.infer<typeof answerQuestionBodySchema>
