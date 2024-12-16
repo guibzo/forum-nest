@@ -17,14 +17,16 @@ export type FetchQuestionCommentsPageRouteParamSchema = z.infer<
   typeof fetchQuestionCommentsPageRouteParamSchema
 >
 
-export const fetchQuestionCommentsResponseSchema = z.array(
-  z.object({
-    id: z.string(),
-    title: z.string(),
-    slug: z.string(),
-    content: z.string(),
-    createdAt: z.date(),
-    updatedAt: z.date().optional(),
-    authorId: z.string(),
-  })
-)
+export const fetchQuestionCommentsResponseSchema = z.object({
+  comments: z.array(
+    z.object({
+      id: z.string(),
+      title: z.string(),
+      slug: z.string(),
+      content: z.string(),
+      createdAt: z.date(),
+      updatedAt: z.date().optional(),
+      authorId: z.string(),
+    })
+  ),
+})

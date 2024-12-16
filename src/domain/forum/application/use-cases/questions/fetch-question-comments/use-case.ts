@@ -1,6 +1,6 @@
 import { success, type Either } from '@/core/either-failure-or-success'
 import { QuestionCommentsRepositoryInterface } from '@/domain/forum/application/repositories'
-import { QuestionComment } from '@/domain/forum/enterprise/entities//question-comment'
+import type { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author'
 import { Injectable } from '@nestjs/common'
 
 type FetchQuestionCommentsUseCaseRequest = {
@@ -8,7 +8,7 @@ type FetchQuestionCommentsUseCaseRequest = {
   questionId: string
 }
 
-type FetchQuestionCommentsUseCaseResponse = Either<null, { questionComments: QuestionComment[] }>
+type FetchQuestionCommentsUseCaseResponse = Either<null, { comments: CommentWithAuthor[] }>
 
 @Injectable()
 export class FetchQuestionCommentsUseCase {
@@ -18,13 +18,13 @@ export class FetchQuestionCommentsUseCase {
     page,
     questionId,
   }: FetchQuestionCommentsUseCaseRequest): Promise<FetchQuestionCommentsUseCaseResponse> {
-    const questionComments = await this.questionCommentsRepository.findManyByQuestionId(
+    const comments = await this.questionCommentsRepository.findManyByQuestionIdWithAuthor(
       questionId,
       { page }
     )
 
     return success({
-      questionComments,
+      comments,
     })
   }
 }
