@@ -1,9 +1,11 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { QuestionCommentsRepositoryInterface } from '@/domain/forum/application/repositories'
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
+import type { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author'
 import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'
+import { PrismaCommentWithAuthorMapper } from './mappers/prisma-comment-with-author-mapper'
 import { PrismaQuestionCommentMapper } from './mappers/prisma-question-comment-mapper'
 
 /* eslint-disable */
@@ -48,6 +50,32 @@ export class PrismaQuestionCommentsRepository implements QuestionCommentsReposit
 
     return questionComments.map((questionComment) =>
       PrismaQuestionCommentMapper.toDomain(questionComment)
+    )
+  }
+
+  async findManyByQuestionIdWithAuthor(
+    questionId: string,
+    { page }: PaginationParams
+  ): Promise<CommentWithAuthor[]> {
+    const perPage = 10
+    const skipHowManyItems = (page - 1) * perPage
+
+    const questionComments = await this.prisma.client.comment.findMany({
+      where: {
+        questionId,
+      },
+      include: {
+        author: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      take: perPage,
+      skip: skipHowManyItems,
+    })
+
+    return questionComments.map((questionComment) =>
+      PrismaCommentWithAuthorMapper.toDomain(questionComment)
     )
   }
 

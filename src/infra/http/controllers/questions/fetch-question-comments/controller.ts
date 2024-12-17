@@ -1,6 +1,6 @@
 import { FetchQuestionCommentsUseCase } from '@/domain/forum/application/use-cases'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
-import { HttpCommentPresenter } from '@/infra/http/presenters/http-comment-presenter'
+import { HttpCommentWithAuthorPresenter } from '@/infra/http/presenters/http-comment-with-author-presenter'
 import { BadRequestException, Controller, Get, Param, Query } from '@nestjs/common'
 import { ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { zodToOpenAPI } from 'nestjs-zod'
@@ -44,9 +44,11 @@ export class FetchQuestionCommentsController {
       throw new BadRequestException()
     }
 
-    const commentsFormatted = result.value.questionComments.map((comment) =>
-      HttpCommentPresenter.toHTTP(comment)
+    const commentsFormatted = result.value.comments.map((comment) =>
+      HttpCommentWithAuthorPresenter.toHTTP(comment)
     )
+
+    console.log('comments', commentsFormatted)
 
     return {
       comments: commentsFormatted,
