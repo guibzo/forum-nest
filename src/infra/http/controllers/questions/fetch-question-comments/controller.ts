@@ -6,10 +6,10 @@ import { ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { zodToOpenAPI } from 'nestjs-zod'
 import {
   fetchQuestionCommentsPageQueryParamSchema,
+  FetchQuestionCommentsPageQueryParamSchema,
   fetchQuestionCommentsPageRouteParamSchema,
+  FetchQuestionCommentsPageRouteParamSchema,
   fetchQuestionCommentsResponseSchema,
-  type FetchQuestionCommentsPageQueryParamSchema,
-  type FetchQuestionCommentsPageRouteParamSchema,
 } from './schemas'
 
 @ApiTags('Questions')
@@ -47,8 +47,6 @@ export class FetchQuestionCommentsController {
     const commentsFormatted = result.value.comments.map((comment) =>
       HttpCommentWithAuthorPresenter.toHTTP(comment)
     )
-
-    console.log('comments', commentsFormatted)
 
     return {
       comments: commentsFormatted,

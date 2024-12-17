@@ -1,15 +1,15 @@
 import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
-import { HttpCommentPresenter } from '@/infra/http/presenters/http-comment-presenter'
+import { HttpCommentWithAuthorPresenter } from '@/infra/http/presenters/http-comment-with-author-presenter'
 import { BadRequestException, Controller, Get, Param, Query } from '@nestjs/common'
 import { ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { zodToOpenAPI } from 'nestjs-zod'
 import {
   fetchAnswerCommentsPageQueryParamSchema,
+  FetchAnswerCommentsPageQueryParamSchema,
   fetchAnswerCommentsPageRouteParamSchema,
+  FetchAnswerCommentsPageRouteParamSchema,
   fetchAnswerCommentsResponseSchema,
-  type FetchAnswerCommentsPageQueryParamSchema,
-  type FetchAnswerCommentsPageRouteParamSchema,
 } from './schemas'
 
 @ApiTags('Answers')
@@ -44,8 +44,8 @@ export class FetchAnswerCommentsController {
       throw new BadRequestException()
     }
 
-    const commentsFormatted = result.value.answerComments.map((comment) =>
-      HttpCommentPresenter.toHTTP(comment)
+    const commentsFormatted = result.value.comments.map((comment) =>
+      HttpCommentWithAuthorPresenter.toHTTP(comment)
     )
 
     return {
