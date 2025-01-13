@@ -1,6 +1,6 @@
 import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
-import { HttpQuestionPresenter } from '@/infra/http/presenters/http-question-presenter'
+import { HttpQuestionDetailsPresenter } from '@/infra/http/presenters/http-question-details-presenter'
 import { BadRequestException, Controller, Get, Param } from '@nestjs/common'
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { zodToOpenAPI } from 'nestjs-zod'
@@ -35,7 +35,7 @@ export class GetQuestionBySlugController {
       throw new BadRequestException()
     }
 
-    const questionFormatted = HttpQuestionPresenter.toHTTP(result.value.question)
+    const questionFormatted = HttpQuestionDetailsPresenter.toHTTP(result.value.question)
 
     return {
       question: questionFormatted,

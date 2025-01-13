@@ -12,6 +12,16 @@ export const getQuestionBySlugResponseSchema = z.object({
     content: z.string(),
     createdAt: z.date(),
     updatedAt: z.date().optional(),
-    authorId: z.string(),
+    author: z.object({
+      name: z.string(),
+      id: z.string(),
+    }),
+    attachments: z.array(
+      z.object({
+        id: z.string(),
+        title: z.string(),
+        url: z.string(),
+      })
+    ),
   }),
 })
