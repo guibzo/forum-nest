@@ -25,6 +25,7 @@ import {
   RegisterStudentUseCase,
   UploadAndCreateAttachmentUseCase,
 } from '@/domain/forum/application/use-cases'
+import { ReadNotificationUseCase } from '@/domain/notification/application/use-cases'
 
 import {
   AnswerQuestionController,
@@ -45,6 +46,7 @@ import {
   FetchQuestionCommentsController,
   FetchRecentQuestionsController,
   GetQuestionBySlugController,
+  ReadNotificationController,
   UploadAttachmentController,
 } from './controllers'
 
@@ -70,6 +72,7 @@ import {
     FetchQuestionCommentsController,
     FetchAnswerCommentsController,
     UploadAttachmentController,
+    ReadNotificationController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -91,6 +94,7 @@ import {
     FetchQuestionCommentsUseCase,
     FetchAnswerCommentsUseCase,
     UploadAndCreateAttachmentUseCase,
+    ReadNotificationUseCase,
   ],
 })
 export class HttpModule {}

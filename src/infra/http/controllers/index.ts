@@ -20,3 +20,5 @@ export * from './questions/fetch-recent-questions/controller'
 export * from './questions/get-question-by-slug/controller'
 
 export * from './attachments/upload-attachment/controller'
+
+export * from './notifications/read-notification/controller'

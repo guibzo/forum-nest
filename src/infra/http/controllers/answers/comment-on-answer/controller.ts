@@ -11,8 +11,8 @@ import {
   Param,
   Post,
 } from '@nestjs/common'
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { createZodDto } from 'nestjs-zod'
+import { ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { createZodDto, zodToOpenAPI } from 'nestjs-zod'
 import {
   commentOnAnswerBodySchema,
   CommentOnAnswerBodySchema,
@@ -30,6 +30,11 @@ export class CommentOnAnswerController {
   @ApiResponse({
     description: 'Comment on a answer',
     status: 201,
+  })
+  @ApiParam({
+    name: 'answerId',
+    schema: zodToOpenAPI(commentOnAnswerRouteParamSchema),
+    required: true,
   })
   async handle(
     @Body(new ZodValidationPipe(commentOnAnswerBodySchema)) body: CommentOnAnswerBodySchema,
