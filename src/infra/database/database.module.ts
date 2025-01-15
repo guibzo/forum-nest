@@ -13,6 +13,7 @@ import {
   QuestionsRepositoryInterface,
   StudentsRepositoryInterface,
 } from '@/domain/forum/application/repositories'
+import { NotificationsRepositoryInterface } from '@/domain/notification/application/repositories/notifications-repository-interface'
 import {
   PrismaAnswerAttachmentsRepository,
   PrismaAnswerCommentsRepository,
@@ -23,6 +24,7 @@ import {
   PrismaQuestionsRepository,
   PrismaStudentsRepository,
 } from './prisma/repositories/index'
+import { PrismaNotificationsRepository } from './prisma/repositories/notification/prisma-notifications-repository'
 
 @Module({
   imports: [
@@ -76,6 +78,10 @@ import {
       useClass: PrismaQuestionAttachmentsRepository,
       provide: QuestionAttachmentsRepositoryInterface,
     },
+    {
+      useClass: PrismaNotificationsRepository,
+      provide: NotificationsRepositoryInterface,
+    },
   ],
   exports: [
     CustomPrismaModule.forRootAsync({
@@ -94,6 +100,7 @@ import {
     QuestionCommentsRepositoryInterface,
     QuestionsRepositoryInterface,
     StudentsRepositoryInterface,
+    NotificationsRepositoryInterface,
   ],
 })
 export class DatabaseModule {}

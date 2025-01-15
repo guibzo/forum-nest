@@ -5,6 +5,7 @@ import { HttpModule } from './http/http.module'
 
 import { envSchema } from './env/env'
 import { EnvService } from './env/env.service'
+import { EventsModule } from './events/events.module'
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { EnvService } from './env/env.service'
     }),
     EnvModule,
     HttpModule,
+    EventsModule,
   ],
   providers: [EnvService],
 })
