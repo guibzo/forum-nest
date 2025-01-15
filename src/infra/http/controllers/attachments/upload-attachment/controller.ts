@@ -3,6 +3,7 @@ import {
   BadRequestException,
   Controller,
   FileTypeValidator,
+  HttpCode,
   MaxFileSizeValidator,
   ParseFilePipe,
   Post,
@@ -23,7 +24,9 @@ export class UploadAttachmentController {
   @ApiResponse({
     schema: zodToOpenAPI(uploadAttachmentResponseSchema),
     description: 'Upload a attachment',
+    status: 201,
   })
+  @HttpCode(201)
   @UseInterceptors(FileInterceptor('file'))
   async handle(
     @UploadedFile(

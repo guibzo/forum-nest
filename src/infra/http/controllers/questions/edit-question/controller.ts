@@ -29,7 +29,6 @@ export class EditQuestionController {
   constructor(private editQuestion: EditQuestionUseCase) {}
 
   @Put()
-  @HttpCode(204)
   @ApiBody({ type: createZodDto(editQuestionBodySchema) })
   @ApiParam({
     name: 'id',
@@ -40,6 +39,7 @@ export class EditQuestionController {
     status: 204,
     description: 'Edit a question',
   })
+  @HttpCode(204)
   async handle(
     @Body(new ZodValidationPipe(editQuestionBodySchema)) body: EditQuestionBodySchema,
     @CurrentUser() user: UserPayload,

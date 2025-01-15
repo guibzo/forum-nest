@@ -2,7 +2,7 @@ import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases'
 import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common'
+import { BadRequestException, Body, Controller, HttpCode, Post } from '@nestjs/common'
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { createZodDto } from 'nestjs-zod'
 import { createQuestionBodySchema, type CreateQuestionBodySchema } from './schemas'
@@ -18,6 +18,7 @@ export class CreateQuestionController {
     description: 'Create a question',
     status: 201,
   })
+  @HttpCode(201)
   async handle(
     @Body(new ZodValidationPipe(createQuestionBodySchema)) body: CreateQuestionBodySchema,
     @CurrentUser() user: UserPayload

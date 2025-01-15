@@ -25,11 +25,11 @@ export class DeleteAnswerCommentController {
   constructor(private deleteAnswerComment: DeleteAnswerCommentUseCase) {}
 
   @Delete()
-  @HttpCode(204)
   @ApiResponse({
     description: 'Delete a answer comment',
     status: 204,
   })
+  @HttpCode(204)
   async handle(
     @CurrentUser() user: UserPayload,
     @Param('commentId', new ZodValidationPipe(deleteAnswerCommentRouteParamSchema))

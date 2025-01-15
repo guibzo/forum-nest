@@ -23,16 +23,16 @@ export class DeleteAnswerController {
   constructor(private deleteAnswer: DeleteAnswerUseCase) {}
 
   @Delete()
-  @HttpCode(204)
-  @ApiResponse({
-    description: 'Delete a question',
-    status: 204,
-  })
   @ApiParam({
     name: 'id',
     schema: zodToOpenAPI(deleteAnswerRouteParamSchema),
     required: true,
   })
+  @ApiResponse({
+    description: 'Delete a question',
+    status: 204,
+  })
+  @HttpCode(204)
   async handle(
     @CurrentUser() user: UserPayload,
     @Param('id', new ZodValidationPipe(deleteAnswerRouteParamSchema))

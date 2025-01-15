@@ -7,6 +7,7 @@ import {
   Body,
   ConflictException,
   Controller,
+  HttpCode,
   Post,
   UsePipes,
 } from '@nestjs/common'
@@ -31,6 +32,7 @@ export class CreateAccountController {
     description: 'Create account with email and password',
     status: 201,
   })
+  @HttpCode(201)
   @UsePipes(new ZodValidationPipe(createAccountBodySchema))
   async handle(@Body() body: CreateAccountBodySchema) {
     const { name, email, password } = body

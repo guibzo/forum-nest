@@ -23,16 +23,16 @@ export class ReadNotificationController {
   constructor(private readNotification: ReadNotificationUseCase) {}
 
   @Patch()
-  @HttpCode(204)
-  @ApiResponse({
-    description: 'Read a notification',
-    status: 204,
-  })
   @ApiParam({
     name: 'notificationId',
     schema: zodToOpenAPI(readNotificationRouteParamSchema),
     required: true,
   })
+  @ApiResponse({
+    description: 'Read a notification',
+    status: 204,
+  })
+  @HttpCode(204)
   async handle(
     @CurrentUser() user: UserPayload,
     @Param('notificationId', new ZodValidationPipe(readNotificationRouteParamSchema))

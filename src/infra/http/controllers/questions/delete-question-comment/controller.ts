@@ -25,11 +25,11 @@ export class DeleteQuestionCommentController {
   constructor(private deleteQuestionComment: DeleteQuestionCommentUseCase) {}
 
   @Delete()
-  @HttpCode(204)
   @ApiResponse({
     description: 'Delete a question comment',
     status: 204,
   })
+  @HttpCode(204)
   async handle(
     @CurrentUser() user: UserPayload,
     @Param('commentId', new ZodValidationPipe(deleteQuestionCommentRouteParamSchema))

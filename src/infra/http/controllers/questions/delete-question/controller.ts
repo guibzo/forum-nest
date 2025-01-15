@@ -22,11 +22,11 @@ export class DeleteQuestionController {
   constructor(private deleteQuestion: DeleteQuestionUseCase) {}
 
   @Delete()
-  @HttpCode(204)
   @ApiResponse({
     description: 'Delete a question',
     status: 204,
   })
+  @HttpCode(204)
   async handle(
     @CurrentUser() user: UserPayload,
     @Param('id', new ZodValidationPipe(deleteQuestionRouteParamSchema))

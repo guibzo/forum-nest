@@ -2,7 +2,7 @@ import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases'
 import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
-import { BadRequestException, Body, Controller, Param, Post } from '@nestjs/common'
+import { BadRequestException, Body, Controller, HttpCode, Param, Post } from '@nestjs/common'
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { createZodDto } from 'nestjs-zod'
 import {
@@ -23,6 +23,7 @@ export class CommentOnQuestionController {
     description: 'Comment on a question',
     status: 201,
   })
+  @HttpCode(201)
   async handle(
     @Body(new ZodValidationPipe(commentOnQuestionBodySchema)) body: CommentOnQuestionBodySchema,
     @CurrentUser() user: UserPayload,

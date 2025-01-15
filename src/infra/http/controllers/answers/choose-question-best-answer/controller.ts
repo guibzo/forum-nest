@@ -26,7 +26,6 @@ export class ChooseQuestionBestAnswerController {
   constructor(private chooseQuestionBestAnswer: ChooseQuestionBestAnswerUseCase) {}
 
   @Patch()
-  @HttpCode(204)
   @ApiParam({
     name: 'answerId',
     schema: zodToOpenAPI(chooseQuestionBestAnswerRouteParamSchema),
@@ -36,6 +35,7 @@ export class ChooseQuestionBestAnswerController {
     status: 204,
     description: 'Choose a question best answer',
   })
+  @HttpCode(204)
   async handle(
     @CurrentUser() user: UserPayload,
     @Param('answerId', new ZodValidationPipe(chooseQuestionBestAnswerRouteParamSchema))

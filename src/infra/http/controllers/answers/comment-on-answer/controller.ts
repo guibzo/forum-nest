@@ -7,6 +7,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  HttpCode,
   NotFoundException,
   Param,
   Post,
@@ -27,15 +28,16 @@ export class CommentOnAnswerController {
 
   @Post()
   @ApiBody({ type: createZodDto(commentOnAnswerBodySchema) })
-  @ApiResponse({
-    description: 'Comment on a answer',
-    status: 201,
-  })
   @ApiParam({
     name: 'answerId',
     schema: zodToOpenAPI(commentOnAnswerRouteParamSchema),
     required: true,
   })
+  @ApiResponse({
+    description: 'Comment on a answer',
+    status: 201,
+  })
+  @HttpCode(201)
   async handle(
     @Body(new ZodValidationPipe(commentOnAnswerBodySchema)) body: CommentOnAnswerBodySchema,
     @CurrentUser() user: UserPayload,
