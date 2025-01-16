@@ -11,3 +11,13 @@ services:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=db-forum-nestjs
+    volumes:
+      - './data/pg:/bitnami/postgresql'
+
+  cache:
+    container_name: container-forum-nestjs-cache
+    image: redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - './data/redis:/data'

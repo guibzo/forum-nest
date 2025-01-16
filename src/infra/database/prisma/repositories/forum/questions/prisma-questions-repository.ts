@@ -6,6 +6,7 @@ import {
 } from '@/domain/forum/application/repositories'
 import { Question } from '@/domain/forum/enterprise/entities/question'
 import { QuestionDetails } from '@/domain/forum/enterprise/entities/value-objects/question-details'
+import type { CacheRepository } from '@/infra/cache/cache-repository'
 import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'
@@ -18,6 +19,7 @@ export class PrismaQuestionsRepository implements QuestionsRepositoryInterface {
   constructor(
     @Inject('PrismaService')
     private prisma: CustomPrismaService<ExtendedPrismaClient>,
+    private cacheRepository: CacheRepository,
     private questionAttachmentsRepository: QuestionAttachmentsRepositoryInterface
   ) {}
 
@@ -50,6 +52,13 @@ export class PrismaQuestionsRepository implements QuestionsRepositoryInterface {
   }
 
   async findDetailsBySlug(slug: string): Promise<QuestionDetails | null> {
+    const cacheHit = await this.cacheRepository.get(`questions:${slug}:details`)
+
+    if (cacheHit) {
+      const cachedData = JSON.parse(cacheHit)
+      return cachedData
+    }
+
     const question = await this.prisma.client.question.findUnique({
       where: {
         slug,
@@ -64,7 +73,11 @@ export class PrismaQuestionsRepository implements QuestionsRepositoryInterface {
       return null
     }
 
-    return PrismaQuestionDetailsMapper.toDomain(question)
+    const questionDetails = PrismaQuestionDetailsMapper.toDomain(question)
+
+    await this.cacheRepository.set(`questions:${slug}:details`, JSON.stringify(questionDetails))
+
+    return questionDetails
   }
 
   async findManyRecent({ page }: PaginationParams): Promise<Question[]> {
@@ -109,6 +122,7 @@ export class PrismaQuestionsRepository implements QuestionsRepositoryInterface {
       }),
       this.questionAttachmentsRepository.createMany(question.attachments.getNewItems()),
       this.questionAttachmentsRepository.deleteMany(question.attachments.getRemovedItems()),
+      this.cacheRepository.delete(`questions:${data.slug}:details`),
     ])
 
     DomainEvents.dispatchEventsForAggregate(question.id)

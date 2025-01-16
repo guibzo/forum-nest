@@ -14,6 +14,7 @@ import {
   StudentsRepositoryInterface,
 } from '@/domain/forum/application/repositories'
 import { NotificationsRepositoryInterface } from '@/domain/notification/application/repositories/notifications-repository-interface'
+import { CacheModule } from '../cache/cache.module'
 import {
   PrismaAnswerAttachmentsRepository,
   PrismaAnswerCommentsRepository,
@@ -35,6 +36,7 @@ import { PrismaNotificationsRepository } from './prisma/repositories/notificatio
         return extendedPrismaClient
       },
     }),
+    CacheModule,
   ],
   providers: [
     PrismaService,
