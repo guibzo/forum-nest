@@ -6,7 +6,7 @@ import {
 } from '@/domain/forum/application/repositories'
 import { Question } from '@/domain/forum/enterprise/entities/question'
 import { QuestionDetails } from '@/domain/forum/enterprise/entities/value-objects/question-details'
-import type { CacheRepository } from '@/infra/cache/cache-repository'
+import { CacheRepository } from '@/infra/cache/cache-repository'
 import { ExtendedPrismaClient } from '@/infra/database/prisma/get-extended-prisma-client'
 import { Inject, Injectable } from '@nestjs/common'
 import { CustomPrismaService } from 'nestjs-prisma'
@@ -52,7 +52,7 @@ export class PrismaQuestionsRepository implements QuestionsRepositoryInterface {
   }
 
   async findDetailsBySlug(slug: string): Promise<QuestionDetails | null> {
-    const cacheHit = await this.cacheRepository.get(`questions:${slug}:details`)
+    const cacheHit = await this.cacheRepository.get(`question:${slug}:details`)
 
     if (cacheHit) {
       const cachedData = JSON.parse(cacheHit)
@@ -75,7 +75,7 @@ export class PrismaQuestionsRepository implements QuestionsRepositoryInterface {
 
     const questionDetails = PrismaQuestionDetailsMapper.toDomain(question)
 
-    await this.cacheRepository.set(`questions:${slug}:details`, JSON.stringify(questionDetails))
+    await this.cacheRepository.set(`question:${slug}:details`, JSON.stringify(questionDetails))
 
     return questionDetails
   }
@@ -122,7 +122,7 @@ export class PrismaQuestionsRepository implements QuestionsRepositoryInterface {
       }),
       this.questionAttachmentsRepository.createMany(question.attachments.getNewItems()),
       this.questionAttachmentsRepository.deleteMany(question.attachments.getRemovedItems()),
-      this.cacheRepository.delete(`questions:${data.slug}:details`),
+      this.cacheRepository.delete(`question:${data.slug}:details`),
     ])
 
     DomainEvents.dispatchEventsForAggregate(question.id)
